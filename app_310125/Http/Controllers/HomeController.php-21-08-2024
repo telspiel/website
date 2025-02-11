@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use DB;
+class HomeController extends Controller
+{
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $getBanner = DB::table('homepage_banner')->where('status','Enable')->first();
+        $Clients = DB::table('Clients')->where('show_on_home_page_chkbox','Yes')->where('status','Enable')->get();
+        $success_storypage_casestudy = DB::table('success_storypage_casestudy')->select('success_storypage_casestudy.*')->get();
+        $solution_sub_categories = DB::table('solution_sub_categories')->select('solution_sub_categories.*')->limit(5)->get();
+
+        if(!$getBanner){
+            return redirect('404');
+        }
+               
+        return view('pages.index', compact('getBanner','Clients','success_storypage_casestudy','solution_sub_categories'));
+    }
+    public function aboutCmpany()
+    {
+              
+        return view('pages.about-us-company');
+    }
+    public function solutionPage()
+    {
+        $solution_main_category = DB::table('solution_main_category')->select('solution_main_category.*')->where('status','Enable')->get();
+
+        if($solution_main_category->isEmpty()){
+            return redirect('404');
+        }        
+
+        $our_impacts_numbers = DB::table('our_impacts_numbers')
+                                    ->select('our_impacts_numbers.*')
+                                    ->where('status', 'Enable')
+                                    ->get();
+        $solution_usecaselogo = DB::table('solution_usecaselogo')
+                                    ->select('solution_usecaselogo.*')
+                                    ->where('status', 'Enable')
+                                    ->get();
+        $solution_usp =         DB::table('solution_usp')
+                                    ->select('solution_usp.*')
+                                    ->where('status', 'Enable')
+                                    ->get();
+        $solution_usecasecontent = DB::table('solution_usecasecontent')
+                                    ->select('solution_usecasecontent.*')
+                                    ->get();
+
+        return view('pages.solutions', compact('solution_main_category','our_impacts_numbers','solution_usecaselogo','solution_usecasecontent','solution_usp'));
+    }
+
+    public function solutionSubPageDetails($cat_id,$subCatId)
+    {
+        $solution_sub_categories = DB::table('solution_sub_categories')
+                                    ->select('solution_sub_categories.*')
+                                    ->where('cat_id',$cat_id)
+                                    ->where('slug',$subCatId)
+                                    ->where('status','Enable')
+                                    ->first();
+        
+
+        if(!isset($solution_sub_categories)){
+            return redirect('404');
+        } 
+
+        $solutions_category_cardcontent = DB::table('solutions_category_cardcontent')
+                                    ->select('solutions_category_cardcontent.*')
+                                    ->where('solution_catid',$solution_sub_categories->id)->where('status','Enable')
+                                    ->first();
+        $solutions_benefits = DB::table('solutions_benefits')
+                                    ->select('solutions_benefits.*')
+                                    ->where('solution_catid',$solution_sub_categories->id)->where('status','Enable')
+                                    ->get();       
+        
+        return view('pages.solutions-services', compact('solution_sub_categories','solutions_category_cardcontent','solutions_benefits'));
+    }
+    
+    
+}

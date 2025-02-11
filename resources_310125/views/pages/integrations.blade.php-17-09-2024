@@ -1,0 +1,375 @@
+@extends('layouts.app')
+
+@section("htmlheader_title", $integration_page_headings->meta_title)
+
+@section("htmlheader_desc", $integration_page_headings->meta_desc)
+
+@section("htmlheader_keyword", $integration_page_headings->meta_keyword)
+
+@section('content')
+    
+    
+    <div class="py-5 bg-gradiant-1 borderbottom">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6">
+                    <h1 class=" my-lg-4 fs-68 fw-medium lh-1 text-m-40">
+                        {{$integration_banner->title}}
+                    </h1>
+                    <p class="fs-5 grey-1 mb-4 text-m-16">
+                        {{$integration_banner->detail}}
+                    </p>
+                    <a href="{{$integration_banner->url}}" class="btn btn-warning">{{$integration_banner->cta_link}}</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{{url($integration_banner->image)}}" class="w-100 hero-img" alt="{{$integration_banner->image_alt}}" title="{{$integration_banner->image_title}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @if(!$integration_categories->isEmpty())
+    <section class="borderbottom ">
+        <div class="container">
+            <ul class="nav navmenu2" id="myTab" role="tablist">
+                @foreach($integration_categories as $category)
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="category-tab_{{$category->id}}" data-bs-toggle="tab" href="#Category_{{$category->id}}" role="tab"
+                        aria-controls="Category_{{$category->id}}" aria-selected="true">{{$category->category_name}}<img
+                            src="{{url('assets/images/icons/right-icon.svg')}}" alt=""></a>
+                </li>
+                @endforeach
+
+            </ul>
+        </div>
+    </section>
+    @endif
+    @if(!$integration_categories->isEmpty())
+    <section class="">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                @foreach($integration_categories as $category)
+                <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="Category_{{$category->id}}" role="tabpanel"
+                    aria-labelledby="category-tab_{{$category->id}}">
+                    @php
+                    $integration_sub_categories = DB::table('integration_sub_categories')
+                                    ->select('integration_sub_categories.*')
+                                    ->where('cat_id',$category->id)
+                                    ->where('status','Enable')
+                                    ->get(); 
+                    @endphp
+                    @if(!$integration_sub_categories->isEmpty())
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="row pt-lg-4  gx-lg-5">
+                                <div class="col-lg-6 border-end">
+                                    
+                                    <ul class="navmenu2 flex-column align-items-start p-0 d-none d-lg-flex"
+                                        role="tablist" id="myTab2">
+                                        @foreach($integration_sub_categories as $subCat)
+                                        <li role="presentation">
+                                            <a class="{{ $loop->first ? 'active' : '' }}" id="subcat-tab_{{$subCat->id}}" data-bs-toggle="tab" href="#subCat_{{$subCat->id}}"
+                                                role="tab" aria-controls="subCat_{{$subCat->id}}" aria-selected="true">
+                                                {{$subCat->title}} <img src="{{url('assets/images/icons/right-icon.svg')}}" alt="">
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    
+                                    <div class="d-lg-none pt-5 pb-0 px-lg-3">
+                                        <div class="dropdown navmenu2drop ">
+                                            @foreach($integration_sub_categories as $subCat)
+                                            @if($loop->first)
+                                            <button type="button " class="changetext" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                {{$subCat->title}}
+                                            </button>
+                                            @endif
+                                            @endforeach
+                                            <ul class="dropdown-menu" role="tablist">
+                                                @foreach($integration_sub_categories as $subCat)
+                                                <li role="presentation"><a class="dropdown-item {{ $loop->first ? 'active' : '' }}" href="#subCat_{{$subCat->id}}"
+                                                        data-bs-toggle="tab" data-tab-name="subCat_{{$subCat->id}}">{{$subCat->title}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="tab-content" id="myTab2Content">
+                                        @foreach($integration_sub_categories as $subCat)
+                                        @php
+                                        $integration_services_category = DB::table('integration_services_category')
+                                                        ->select('integration_services_category.*')
+                                                        ->where('cat_id',$subCat->cat_id)
+                                                        ->where('sub_cat_id',$subCat->id)
+                                                        ->where('status','Enable')
+                                                        ->get(); 
+                                        @endphp
+                                        <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="subCat_{{$subCat->id}}" role="tabpanel"
+                                            aria-labelledby="subcat-tab_{{$subCat->id}}">
+                                            @if(!$integration_services_category->isEmpty())
+                                            <div class="nav-resposnive d-lg-block d-none">
+                                                
+                                                <ul class="navmenu2 flex-lg-column align-items-start p-0 ms-xxl-4"
+                                                    role="tablist" id="myTab3">
+                                                    @foreach($integration_services_category as $service)
+                                                    <li role="presentation">
+                                                        <a class="{{ $loop->first ? 'active' : '' }}" id="service-tab_{{$service->id}}" data-bs-toggle="tab"
+                                                            href="#Service_{{$service->id}}" role="tab" aria-controls="Service_{{$service->id}}"
+                                                            aria-selected="true">
+                                                            {{$service->title}} <img src="{{url('assets/images/icons/right-icon.svg')}}" alt="">
+                                                        </a>
+                                                    </li>
+                                                    @endforeach
+
+
+                                                </ul>
+                                                
+                                            </div>
+
+
+
+                                            <div class="d-lg-none pt-3 pb-0 px-lg-3">
+
+                                                <div class="dropdown navmenu2drop">
+                                                    @foreach($integration_services_category as $service)
+                                                    @if($loop->first)
+                                                    <button type="button " class="changetext bg-transparent" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                        {{$service->title}}
+                                                    </button>
+                                                    @endif
+                                                    @endforeach
+                                                    <ul class="dropdown-menu" role="tablist">
+                                                        @foreach($integration_services_category as $service)
+                                                        <li role="presentation"><a class="dropdown-item {{ $loop->first ? 'active' : '' }}"
+                                                                href="#Service_{{$service->id}}" data-bs-toggle="tab"
+                                                                data-tab-name="Service_{{$service->id}}">SMS</a></li>
+                                                       @endforeach
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @endif
+
+                                        </div>
+                                        @endforeach
+                                        @foreach($integration_sub_categories as $subCat)
+                                        <div class="tab-pane fade" id="subCat_{{$subCat->id}}" role="tabpanel"
+                                            aria-labelledby="subcat-tab_{{$subCat->id}}">
+                                            @if(!$integration_services_category->isEmpty())
+                                            <div class="nav-resposnive">
+                                                <ul class="navmenu2 flex-lg-column align-items-start p-0 ms-xxl-4 ">
+                                                    <li>
+                                                        <a href="solutions-list.php">
+                                                            SMS2 <img src="assets/images/icons/right-icon.svg" alt="">
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#" class="active">
+                                                            WhatsApp<img src="assets/images/icons/right-icon.svg"
+                                                                alt="">
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#">
+                                                            RCS <img src="assets/images/icons/right-icon.svg" alt="">
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#">
+                                                            Email <img src="assets/images/icons/right-icon.svg" alt="">
+                                                        </a>
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+                                            @endif
+                                        </div>
+                                        @endforeach
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-lg-8">
+                            @php
+                                $firstActiveClassAdded = false;
+                            @endphp
+                            <div class="tab-content" id="myTab3Content">
+                                @foreach($integration_sub_categories as $subCat)
+                                @php
+                                $integration_services_category = DB::table('integration_services_category')
+                                                ->select('integration_services_category.*')
+                                                ->where('cat_id',$subCat->cat_id)
+                                                ->where('sub_cat_id',$subCat->id)
+                                                ->where('status','Enable')
+                                                ->get(); 
+                                @endphp
+                                @if(!$integration_services_category->isEmpty())
+                                @foreach($integration_services_category as $service)
+                                @php
+                                $integration_services_content = DB::table('integration_services_content')
+                                                ->select('integration_services_content.*')
+                                                ->where('cat_id',$service->cat_id)
+                                                ->where('sub_cat_id',$service->sub_cat_id)
+                                                ->where('services_id',$service->id)
+                                                ->where('status','Enable')
+                                                ->first(); 
+
+                                @endphp
+                                @if(isset($integration_services_content))
+                                @php
+                                    $activeClass = !$firstActiveClassAdded ? 'active show' : '';
+                                    $firstActiveClassAdded = true; // Set flag to true after the first iteration
+                                @endphp
+                                <div class="tab-pane fade {{ $activeClass }} " id="Service_{{$service->id}}" role="tabpanel"
+                                    aria-labelledby="service-tab_{{$service->id}}" tabindex="0">
+                                    
+                                    <div class="card light-bg rounded-0 border-0 p-lg-3">
+                                        <div class="card-body">
+                                            <h2 class="fs-3 text-m-20">{{$integration_services_content->title}}</h2>
+                                            <img src="{{url($integration_services_content->image)}}" class="my-3" alt="{{$integration_services_content->image_alt}}" title="{{$integration_services_content->image_title}}">
+                                            <p>{{$integration_services_content->content}}</p>
+                                            <button value="{{$integration_services_content->id}}" class="btn btn-outline-light text-secondary border-light-2 downloadBtnClick"
+                                                data-bs-toggle="modal" data-bs-target="#formmodal">{{$integration_services_content->cta_name}}</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                @endif
+                                @endforeach
+                                @endif
+                                @endforeach
+                            </div>
+                            
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                @endforeach
+                <!-- <div class="tab-pane fade" id="Api" role="tabpanel" aria-labelledby="Api-tab">
+                    
+                </div> -->
+            </div>
+        </div>
+    </section>
+    @endif
+    @if(!$integration_benefits->isEmpty())
+    <section class="section-spacing position-relative">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center">
+                        <div class="badge-only mb-0">
+                            <img src="{{url($integration_page_headings->benefit_icon)}}" alt="" />
+                            {{$integration_page_headings->benefit_title}}
+                        </div>
+
+                        <h3 class="fs-44 fw-medium text-m-32">{{$integration_page_headings->benefit_subtitle}}</h3>
+                        <p>{{$integration_page_headings->benefit_shortdesc}}</p>
+                    </div>
+                </div>
+            </div>
+            <ul class="whattheysay mt-lg-5 mt-2">
+                @foreach($integration_benefits as $benifit)
+                <li><img src="{{url($benifit->icon)}}" alt="{{$benifit->one_liner_content}}">
+                    <p>{{$benifit->one_liner_content}}</p>
+                </li>
+                @endforeach
+            </ul>
+            <img src="{{url($integration_page_headings->benefit_bg_png)}}" class="whattheysay-mg d-none d-lg-block" alt="{{$integration_page_headings->benefit_bg_image_alt}}" title="{{$integration_page_headings->benefit_bg_image_title}}">
+        </div>
+
+    </section>
+    @endif
+
+
+
+
+    @if(!$integration_usp->isEmpty())
+    <section class="section-spacing">
+        <div class="container">
+            <div class="reduce-90px-width">
+                <div class="row g-4">
+                    <div class="col-lg-12">
+                        <div class="badge-only mb-0">
+                            <img src="{{url($integration_page_headings->usp_icon)}}" alt="{{$integration_page_headings->usp_title}}" /> {{$integration_page_headings->usp_title}}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <h4 class="fs-44 fw-medium mb-0 text-m-32">{{$integration_page_headings->usp_subtitle}}</h4>
+                    </div>
+                    @foreach($integration_usp as $usp)
+                    <div class="col-lg-4">
+                        <div class="card bg-gradiant-2 p-1 comman-card ">
+                            <div class="card-body">
+                                <img src="{{url($usp->icon)}}" alt="{{$usp->image_alt}}" title="{{$usp->image_title}}">
+                                <h6 class="fs-5 fw-bold my-3 pb-0">{{$usp->title}}</h6>
+                                <p class="mb-0">{{$usp->short_des}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+
+
+    <!-- Modal -->
+    <div class="modal fade mmodal" id="formmodal" tabindex="-1" aria-labelledby="formmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 py-2">
+                    <h1 class="modal-title fs-3 mx-auto" id="formmodalLabel">Form Title</h1>
+                    <button type="button" class="btn-close modalclose" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="content_id" name="" value="">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="yname" placeholder="Your Name">
+                        <label for="yname">Your Name</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="email" class="form-control" id="Email" placeholder="Email">
+                        <label for="Email">Email</label>
+                    </div>
+
+                    <button type="button" class="btn btn-warning w-100">Submit and Download</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endsection
+
+
+
+@section('script_content')
+
+<script>
+    $(document).on('click','.downloadBtnClick',function(){
+        var id = $(this).val();
+        $('.content_id').val(id);
+    });
+</script>
+
+@endsection

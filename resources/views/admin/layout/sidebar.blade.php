@@ -11,24 +11,50 @@
         <span class="material-icons-outlined">close</span>
       </div>
     </div>
-    <div class="sidebar-nav">
+    <div class="sidebar-nav mm-active">
         <!--navigation-->
-        <ul class="metismenu" id="sidenav" class="has-arrow">
-          <li class="@if (Route::is('admin.dashboard')) mm-active @endif">
+        <ul class="metismenu" id="sidenav" class="has-arrow mm-collapse">
+          {{-- <li class="@if (Route::is('admin.dashboard')) mm-active @endif">
             <a href="/admin/dashboard" >
               <div class="parent-icon"><i class="material-icons-outlined">home</i>
               </div>
               <div class="menu-title">Dashboard</div>
             </a>
 
+          </li> --}}
+          <li class="@if (Route::is('admin.home.*')) mm-active @endif">
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="material-icons-outlined">home</i>
+              </div>
+              <div class="menu-title">Dashboard</div>
+            </a>
+            <ul>
+              <li><a href="{{ route('admin.home.brands') }}"><i class="material-icons-outlined">arrow_right</i>Brands</a>
+              </li>
+              <li><a href="{{ route('admin.home.array-expertise') }}"><i class="material-icons-outlined">arrow_right</i>Array Of Our Expertise</a>
+              </li>
+            </ul>
           </li>
-          <li class="@if (Route::is('admin.clients')) mm-active @endif">
+          {{-- <li class="@if (Route::is('admin.clients')) mm-active @endif">
             <a href="{{ route('admin.clients') }}">
               <div class="parent-icon"><i class="material-icons-outlined">group</i>
               </div>
               <div class="menu-title">Clients</div>
             </a>
 
+          </li> --}}
+           <li>
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="material-icons-outlined">info</i>
+              </div>
+              <div class="menu-title">About</div>
+            </a>
+            <ul>
+              <li><a href="index2.html"><i class="material-icons-outlined">arrow_right</i>Brands</a>
+              </li>
+              <li><a href="index2.html"><i class="material-icons-outlined">arrow_right</i>eCommerce</a>
+              </li>
+            </ul>
           </li>
          </ul>
         <!--end navigation-->

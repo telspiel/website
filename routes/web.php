@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminArrayExpertiseController;
+use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -86,17 +88,25 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
-
-    // Clients
-    Route::get('/clients', [AdminClientController::class, 'index'])->name('admin.clients');
-    Route::get('/clients/list', [AdminClientController::class, 'list'])->name('admin.clients.list');
-    Route::post('/clients', [AdminClientController::class, 'save'])->name('admin.clients.save');
-    Route::delete('/clients/{id}/delete', [AdminClientController::class, 'delete'])->name('admin.clients.delete');
-    Route::post('/clients', [AdminClientController::class, 'save'])->name('admin.clients.save');
-
     // Profile
     Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
-    Route::put('/profile/password/update', [AdminProfileController::class, 'updateChange'])->name('admin.profile.password');
+    Route::post('/profile/password/update', [AdminProfileController::class, 'updateChange'])->name('admin.profile.password');
+
+    // Website Home Page
+    Route::get('home/brands', [AdminBrandController::class, 'index'])->name('admin.home.brands');
+    Route::get('home/brands/list', [AdminBrandController::class, 'list'])->name('admin.home.brand-list');
+    Route::post('home/brands', [AdminBrandController::class, 'save'])->name('admin.home.brand-save');
+    Route::delete('home/brands/{id}/delete', [AdminBrandController::class, 'delete'])->name('admin.home.brand-delete');
+    Route::put('home/brands/{id}/{status}/status', [AdminBrandController::class, 'status'])->name('admin.home.brand-status');
+
+
+    Route::get('home/array-expertise', [AdminArrayExpertiseController::class, 'index'])->name('admin.home.array-expertise');
+    Route::get('home/array-expertise/list', [AdminArrayExpertiseController::class, 'list'])->name('admin.home.array-expertise-list');
+    Route::post('home/array-expertise', [AdminArrayExpertiseController::class, 'expertiseSave'])->name('admin.home.array-expertise-save');
+    Route::delete('home/array-expertise/{id}/delete', [AdminArrayExpertiseController::class, 'delete'])->name('admin.home.array-expertise-delete');
+    Route::put('home/array-expertise/{id}/{status}/status', [AdminArrayExpertiseController::class, 'status'])->name('admin.home.array-expertise-status');
+
+
 
 });
 

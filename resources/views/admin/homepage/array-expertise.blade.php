@@ -11,7 +11,6 @@
         .textarea-dimension {
             height: 150px;
             width: 350px;
-            white-space: pre-wrap;
         }
 
         .save-btn {
@@ -92,9 +91,8 @@
 
             <div class="ms-auto" style="float: right;margin-top: -30px;">
                 <div class="btn-group">
-                    <button type="button" class="btn px-4"
-                        style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}"
-                        data-bs-toggle="modal" data-bs-target="#FormModal">Add New</button>
+                    <a type="button" class="btn px-4" href="{{ route('admin.home.array-expertise.create') }}"
+                        style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}">Add New</a>
 
                 </div>
             </div>
@@ -148,18 +146,18 @@
                                     @csrf
                                     <input type="hidden" value="" name="id" id="id">
                                     <div class="col-md-12">
-                                        <label for="client_name" class="form-label">Client Name</label>
+                                        <label for="client_name" class="form-label">Client Name<span  style="color:red"> *</span></label>
                                         <input type="text" class="form-control" id="client_name" name="client_name"
                                             placeholder="Client Name" required>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label for="title" class="form-label">Title</label>
+                                        <label for="title" class="form-label">Title<span  style="color:red"> *</span></label>
                                         <input type="text" class="form-control" id="title" name="title"
                                             placeholder="Title" required>
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="status" class="form-label">Status</label>
+                                        <label for="status" class="form-label">Status<span  style="color:red"> *</span></label>
                                         <select id="status" class="form-select" name="status" required>
                                             <option value="">Choose...</option>
                                             <option value="Enable">Enable</option>
@@ -173,7 +171,7 @@
                                             <div class="card-body">
                                                 <label for="status" class="form-label">Image should be (300*300) and
                                                     less
-                                                    than 1MB</label>
+                                                    than 1MB<span  style="color:red"> *</span></label>
                                                 <div id="img_section">
                                                     <input id="client_logo" type="file" name="logo"
                                                         class="dropify" accept=".jpg, .png, image/jpeg, image/png"
@@ -296,7 +294,7 @@
                 }, {
                     "targets": 14,
                     "render": function(data, type, full) {
-                        return `<select id="status" class="form-select" name="status" onchange="brandStatus('${full.encrypt_id}',this.value)" required>
+                        return `<select id="status" style="width: fit-content !important;" class="form-select" name="status" onchange="brandStatus('${full.encrypt_id}',this.value)" required>
                                         <option value="Enable" ${(full.status=='Enable')? "selected" :''}>Enable</option>
                                         <option value="Disable" ${(full.status=='Disable')? "selected" :''}>Disable</option>
                                     </select>`;
@@ -304,15 +302,16 @@
                 }, {
                     "targets": 15,
                     "render": function(data, type, full) {
-                        return `<a href="#!" onclick="deleteLogo('${full.encrypt_id}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-primary"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>
+                        return `<div style="width:max-content;"><a href="#!" onclick="deleteRow('${full.encrypt_id}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-primary"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>
                                     &nbsp;&nbsp;
-                                <a href="#!" onclick="edit('${full.encrypt_id}','${full.title}','${full.client_name}','${full.logo}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-primary"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>`;
+                                <a href="/admin/home/array-expertise/create/${full.encrypt_id})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-primary"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
+                                </div>`;
                     }
                 }]
             });
         });
 
-        function deleteLogo(id) {
+        function deleteRow(id) {
 
             Swal.fire({
                 title: "Are you sure?",

@@ -103,6 +103,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('home/array-expertise', [AdminArrayExpertiseController::class, 'index'])->name('admin.home.array-expertise');
     Route::get('home/array-expertise/list', [AdminArrayExpertiseController::class, 'list'])->name('admin.home.array-expertise-list');
     Route::post('home/array-expertise', [AdminArrayExpertiseController::class, 'expertiseSave'])->name('admin.home.array-expertise-save');
+
+    Route::get('home/array-expertise/create/{id?}', [AdminArrayExpertiseController::class, 'create'])->name('admin.home.array-expertise.create');
+    Route::post('home/array-expertise/save', [AdminArrayExpertiseController::class, 'save'])->name('admin.home.array-expertise-save-right');
     Route::delete('home/array-expertise/{id}/delete', [AdminArrayExpertiseController::class, 'delete'])->name('admin.home.array-expertise-delete');
     Route::put('home/array-expertise/{id}/{status}/status', [AdminArrayExpertiseController::class, 'status'])->name('admin.home.array-expertise-status');
 

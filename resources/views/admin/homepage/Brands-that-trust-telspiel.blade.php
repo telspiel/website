@@ -69,18 +69,18 @@
                                     @csrf
                                     <input type="hidden" value="" name="id" id="id">
                                     <div class="col-md-12">
-                                        <label for="client_name" class="form-label">Client Name</label>
+                                        <label for="client_name" class="form-label">Client Name<span  style="color:red"> *</span></label>
                                         <input type="text" class="form-control" id="client_name" name="client_name"
                                             placeholder="Client Name" required>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label for="title" class="form-label">Title</label>
+                                        <label for="title" class="form-label">Title<span  style="color:red"> *</span></label>
                                         <input type="text" class="form-control" id="title" name="title"
                                             placeholder="Title" required>
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="status" class="form-label">Status</label>
+                                        <label for="status" class="form-label">Status<span  style="color:red"> *</span></label>
                                         <select id="status" class="form-select" name="status" required>
                                             <option value="">Choose...</option>
                                             <option value="Enable">Enable</option>
@@ -88,7 +88,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12 mx-auto">
-                                        <h6 class="mb-0 text-uppercase">Logo</h6>
+                                        <h6 class="mb-0 text-uppercase">Logo<span  style="color:red"> *</span></h6>
                                         <hr>
                                         <div class="card">
                                             <div class="card-body">

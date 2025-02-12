@@ -13,7 +13,7 @@ class ArrayExpertiseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ArrayExpertiseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category' => ['required', 'numeric'],
+            'title' => ['required', 'string'],
+            'icon' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
+            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
+            'slug' => ['required', 'string'],
+            'link_name' => ['required', 'string'],
+            'banner_cta_name' => ['required', 'string'],
+            'banner_cta_link' => ['required', 'string'],
         ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 @section('title')
-    | Array Expertise
+    | Supercharging Business
 @endsection
 @section('css')
     <style>
@@ -25,52 +25,34 @@
         <div class="main-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Array Of Our Expertise</div>
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">List</li>
-                        </ol>
-                    </nav>
-                </div>
+                <div class="breadcrumb-title pe-3">Case Studies | Title</div>
+
 
 
             </div>
             <!--end breadcrumb-->
-            {{-- <h6 class="mb-0 text-uppercase">Solutions</h6>
-            <hr> --}}
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form method="post" action="{{ route('admin.home.array-expertise-save') }}">
+                        <form method="post" action="{{ route('admin.home.case-studies-title.save') }}">
                             @csrf
-                            <input type="hidden" id="our_expertise_id" name="our_expertise_id"
-                                value="{{ encrypt($ourExpertise->id) }}">
+                            <input type="hidden" id="title_id" name="case_study_title_id"
+                                value="{{ encrypt($caseTitle->id) }}">
                             <table id="example2" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Short Title</th>
                                         <th>Title</th>
-                                        <th>Detail</th>
-                                        <th>CTA Link</th>
-                                        <th>Url</th>
+                                        <th>Heading</th>
                                         <th>Action</th>
                                     </tr>
                                 <tbody>
                                     <tr>
-                                        <td><input type="text" class="no-border form-control" readonly name="short_title"
-                                                value="{{ $ourExpertise->short_title }}"></td>
                                         <td><input type="text" class="no-border form-control" readonly name="title"
-                                                value="{{ $ourExpertise->title }}"></td>
-                                        <td><textarea class="no-border textarea-dimension form-control" name="detail" readonly>
-                                         {!! nl2br(e($ourExpertise->detail)) !!} </textarea>
+                                                value="{{ $caseTitle->title }}"></td>
+                                        <td>
+                                            <textarea class="no-border form-control" name="heading" readonly>
+                                         {!! nl2br(e($caseTitle->heading)) !!} </textarea>
                                         </td>
-                                        <td><input type="text" class="no-border form-control" readonly name="cta_link"
-                                                value="{{ $ourExpertise->cta_link }}"></td>
-                                        <td><input type="text" class="no-border form-control" readonly name="url"
-                                                value="{{ $ourExpertise->url }}"></td>
                                         <td>
                                             <div id="table-action">
                                                 <a href="#!" onclick="editRow()">
@@ -87,11 +69,21 @@
                 </div>
             </div>
 
-            <h6 class="mb-0 text-uppercase">Array Of Our Expertise | Right</h6>
-
-            <div class="ms-auto" style="float: right;margin-top: -30px;">
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Case Studies</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">List</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="ms-auto" style="float: right;margin-top: -50px;">
                 <div class="btn-group">
-                    <a type="button" class="btn px-4" href="{{ route('admin.home.array-expertise.create') }}"
+                    <a type="button" class="btn px-4" href="{{ route('admin.home.case-studies.create') }}"
                         style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}">Add New</a>
 
                 </div>
@@ -103,20 +95,28 @@
                         <table id="example" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Cat Id</th>
-                                    <th>Icon</th>
                                     <th>Title</th>
-                                    <th>Slug</th>
-                                    <th>Detail</th>
-                                    <th>link Name</th>
+                                    <th>Industry Id</th>
+                                    <th>Product Id</th>
+                                    <th>Icon</th>
+                                    <th>Shot Desc</th>
                                     <th>Image</th>
                                     <th>Image Alt</th>
                                     <th>Image Title</th>
-                                    <th>Banner CTA Name</th>
-                                    <th>Banner CTA Link</th>
-                                    <th>Meta Title</th>
-                                    <th>Meta Desc</th>
-                                    <th>Meta Keyword</th>
+                                    <th>Youtube Video Link</th>
+                                    <th>Number % Data1</th>
+                                    <th>Oneliner % Data1</th>
+                                    <th>Number % Data2</th>
+                                    <th>Oneliner % Data2</th>
+                                    <th>Number % Data3</th>
+                                    <th>Oneliner % Data3</th>
+                                    <th>Details</th>
+                                    <th>Company Desc</th>
+                                    <th>Website</th>
+                                    <th>Headquaters</th>
+                                    <th>Industry</th>
+                                    <th>Product Used</th>
+                                    <th>CTA Url</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -143,34 +143,27 @@
                 ordering: false,
                 searching: true,
                 ajax: {
-                    url: '{{ route('admin.home.array-expertise-list') }}',
+                    url: '{{ route('admin.home.case-studies.list') }}',
                 },
                 columns: [{
-                        data: 'cat_id',
-                        name: 'cat_id'
-                    },
-                    {
-                        data: 'icon',
-                        name: 'icon'
-                    },
-                    {
                         data: 'title',
                         name: 'title'
                     },
                     {
-                        data: 'slug',
-                        name: 'slug'
+                        data: 'industry_id',
+                        name: 'industry_id'
                     },
                     {
-                        data: 'detail',
-                        name: 'detail'
+                        data: 'product_id',
+                        name: 'product_id'
                     },
                     {
-                        data: 'link_name',
-                        name: 'link_name'
+                        name: 'icon'
                     },
                     {
-                        data: 'image',
+                        name: 'shot_desc'
+                    },
+                    {
                         name: 'image'
                     },
                     {
@@ -182,24 +175,60 @@
                         name: 'image_title'
                     },
                     {
-                        data: 'banner_cta_name',
-                        name: 'banner_cta_name'
+                        data: 'youtube_video_link',
+                        name: 'youtube_video_link'
                     },
                     {
-                        data: 'banner_cta_link',
-                        name: 'banner_cta_link'
+                        data: 'number_perc_data1',
+                        name: 'number_perc_data1'
                     },
                     {
-                        data: 'meta_title',
-                        name: 'meta_title'
+                        data: 'oneliner_perc_data1',
+                        name: 'oneliner_perc_data1'
                     },
                     {
-                        data: 'meta_desc',
-                        name: 'meta_desc'
+                        data: 'number_perc_data1',
+                        name: 'number_perc_data1'
                     },
                     {
-                        data: 'meta_keyword',
-                        name: 'meta_keyword'
+                        data: 'oneliner_perc_data2',
+                        name: 'oneliner_perc_data2'
+                    },
+                    {
+                        data: 'number_perc_data3',
+                        name: 'number_perc_data3'
+                    },
+                    {
+                        data: 'oneliner_perc_data3',
+                        name: 'oneliner_perc_data3'
+                    },
+
+                    {
+                        name: 'details'
+                    },
+                    {
+                        data: 'company_desc',
+                        name: 'company_desc'
+                    },
+                    {
+                        data: 'website',
+                        name: 'website'
+                    },
+                    {
+                        data: 'headquaters',
+                        name: 'headquaters'
+                    },
+                    {
+                        data: 'industry',
+                        name: 'industry'
+                    },
+                    {
+                        data: 'product_used',
+                        name: 'product_used'
+                    },
+                    {
+                        data: 'cta_url',
+                        name: 'cta_url'
                     },
                     {
 
@@ -211,29 +240,39 @@
 
                 ],
                 columnDefs: [{
-                    "targets": 1,
+                    "targets": 3,
                     "render": function(data, type, full) {
                         return `<img src="{{ asset('${full.icon}') }}" />`;
                     }
-                }, {
-                    "targets": 6,
+                },{
+                    "targets": 4,
                     "render": function(data, type, full) {
-                        return `<a href="{{ asset('${full.image}') }}" target="_blank"><img src="{{ asset('${full.image}') }}" width="90" height="70" /></a>`;
+                        return `<textarea class="form-control" style="width:fit-content;height:150px" readonly>${full.shot_desc}</textarea>`;
                     }
                 }, {
-                    "targets": 14,
+                    "targets": 5,
                     "render": function(data, type, full) {
-                        return `<select id="status" style="width: fit-content !important;" class="form-select" name="status" onchange="brandStatus('${full.encrypt_id}',this.value)" required>
+                        return `<a href="{{ asset('${full.image}') }}" target="_blank"><img src="{{ asset('${full.image}') }}" width="100" height="100"/></a>`;
+                    }
+                }, {
+                    "targets": 15,
+                    "render": function(data, type, full) {
+                        return `<textarea class="form-control" style="width:fit-content;height:150px" readonly>${full.details}</textarea>`;
+                    }
+                }, {
+                    "targets": 22,
+                    "render": function(data, type, full) {
+                        return `<select id="status" style="width: fit-content !important;" class="form-select" name="status" onchange="caseStatus('${full.encrypt_id}',this.value)" required>
                                         <option value="Enable" ${(full.status=='Enable')? "selected" :''}>Enable</option>
                                         <option value="Disable" ${(full.status=='Disable')? "selected" :''}>Disable</option>
                                     </select>`;
                     }
                 }, {
-                    "targets": 15,
+                    "targets": 23,
                     "render": function(data, type, full) {
                         return `<div style="width:max-content;"><a href="#!" onclick="deleteRow('${full.encrypt_id}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-primary"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>
                                     &nbsp;&nbsp;
-                                <a href="/admin/home/array-expertise/create/${full.encrypt_id})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-primary"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
+                                <a href="/admin/home/case-studies/create/${full.encrypt_id})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-primary"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
                                 </div>`;
                     }
                 }]
@@ -253,7 +292,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `/admin/home/array-expertise/${id}/delete`,
+                        url: `/admin/home/case-studies/${id}/delete`,
                         type: "delete",
                         data: {
                             "_token": "{{ csrf_token() }}"
@@ -282,9 +321,9 @@
 
         }
 
-        function brandStatus(id, status) {
+        function caseStatus(id, status) {
             $.ajax({
-                url: `/admin/home/array-expertise/${id}/${status}/status`,
+                url: `/admin/home/case-studies/${id}/${status}/status`,
                 type: "put",
                 data: {
                     "_token": "{{ csrf_token() }}"

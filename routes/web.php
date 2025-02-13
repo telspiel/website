@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\AdminArrayExpertiseController;
 use App\Http\Controllers\Admin\AdminBrandController;
+use App\Http\Controllers\Admin\AdminCaseStudiesController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminSuperhargingBusinessController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -106,10 +108,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('home/array-expertise/create/{id?}', [AdminArrayExpertiseController::class, 'create'])->name('admin.home.array-expertise.create');
     Route::post('home/array-expertise/save', [AdminArrayExpertiseController::class, 'save'])->name('admin.home.array-expertise-save-right');
-    Route::delete('home/array-expertise/{id}/delete', [AdminArrayExpertiseController::class, 'delete'])->name('admin.home.array-expertise-delete');
-    Route::put('home/array-expertise/{id}/{status}/status', [AdminArrayExpertiseController::class, 'status'])->name('admin.home.array-expertise-status');
+    Route::delete('home/array-expertise/{id}/delete', [AdminArrayExpertiseController::class, 'delete'])->name('admin.home.array-expertise.delete');
+    Route::put('home/array-expertise/{id}/{status}/status', [AdminArrayExpertiseController::class, 'status'])->name('admin.home.array-expertise.status');
 
-
+    Route::get('home/case-studies', [AdminCaseStudiesController::class, 'index'])->name('admin.home.case-studies');
+    Route::get('home/case-studies/list', [AdminCaseStudiesController::class, 'list'])->name('admin.home.case-studies.list');
+    Route::get('home/case-studies/create/{id?}', [AdminCaseStudiesController::class, 'create'])->name('admin.home.case-studies.create');
+    Route::post('home/array-expertise/title', [AdminCaseStudiesController::class, 'titleSave'])->name('admin.home.case-studies-title.save');
+    Route::post('home/case-studies/save', [AdminCaseStudiesController::class, 'save'])->name('admin.home.case-studies.save');
+    Route::delete('home/case-studies/{id}/delete', [AdminCaseStudiesController::class, 'delete'])->name('admin.home.case-studies.delete');
+    Route::put('home/case-studies/{id}/{status}/status', [AdminCaseStudiesController::class, 'status'])->name('admin.home.case-studies.status');
 
 });
 

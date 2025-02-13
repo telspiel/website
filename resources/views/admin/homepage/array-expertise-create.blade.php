@@ -62,14 +62,14 @@
                                             *</span></label>
                                     <input id="icon" type="file" name="icon" class="dropify"
                                         accept=".jpg, .png, image/jpeg, image/png" data-max-width="300"
-                                        data-max-height="300" data-max-file-size="1M" required
-                                        @if ($data) data-default-file="{{ asset($data->icon) }}" @endif>
+                                        data-max-height="300" data-max-file-size="1M"
+                                        @if ($data) data-default-file="{{ asset($data->icon) }}" @else required @endif>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="image" class="form-label">Image<span style="color:red"> *</span></label>
                                     <input id="image" type="file" name="image" class="dropify"
-                                        accept=".jpg, .png, image/jpeg, image/png" data-max-file-size="2M" required
-                                        @if ($data) data-default-file="{{ asset($data->image) }}" @endif>
+                                        accept=".jpg, .png, image/jpeg, image/png" data-max-file-size="2M"
+                                        @if ($data) data-default-file="{{ asset($data->image) }}" @else required @endif>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="slug" class="form-label">Slug<span style="color:red"> *</span></label>
@@ -96,11 +96,16 @@
                                         @if ($data) value="{{ $data->banner_cta_link }}" @endif
                                         required>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="d-md-flex d-grid align-items-center gap-3">
                                         <button type="submit" class="btn px-4"
-                                            style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}"> @if ($data) Update @else Submit @endif</button>
+                                            style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}">
+                                            @if ($data)
+                                                Update
+                                            @else
+                                                Submit
+                                            @endif
+                                        </button>
                                         <a href="{{ URL::previous() }}" class="btn btn-grd-danger px-4">Back</a>
                                     </div>
                                 </div>

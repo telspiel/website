@@ -23,15 +23,20 @@ class ArrayExpertiseRequest extends FormRequest
      */
     public function rules()
     {
+        $request = [];
+        if (!request('id')) {
+            $request['icon'] = 'required|file|mimes:jpg,jpeg,png,gif|max:2048';
+            $request['image'] = 'required|file|mimes:jpg,jpeg,png,gif|max:2048';
+        }
+
         return [
             'category' => ['required', 'numeric'],
             'title' => ['required', 'string'],
-            'icon' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
-            'image' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048',
+
             'slug' => ['required', 'string'],
             'link_name' => ['required', 'string'],
             'banner_cta_name' => ['required', 'string'],
             'banner_cta_link' => ['required', 'string'],
-        ];
+        ] + $request;
     }
 }

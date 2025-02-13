@@ -33,6 +33,8 @@
               </li>
               <li><a href="{{ route('admin.home.array-expertise') }}"><i class="material-icons-outlined">arrow_right</i>Array Of Our Expertise</a>
               </li>
+              <li><a href="{{ route('admin.home.case-studies') }}"><i class="material-icons-outlined">arrow_right</i>Case Studies</a>
+              </li>
             </ul>
           </li>
           {{-- <li class="@if (Route::is('admin.clients')) mm-active @endif">

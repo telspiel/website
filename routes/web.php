@@ -5,8 +5,11 @@ use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminCaseStudiesController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
+use App\Http\Controllers\Admin\AdminLeadershipController;
+use App\Http\Controllers\Admin\AdminPresenceController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSuperhargingBusinessController;
+use App\Http\Controllers\Admin\AdminWorklifeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -94,7 +97,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
     Route::post('/profile/password/update', [AdminProfileController::class, 'updateChange'])->name('admin.profile.password');
 
-    // Website Home Page
+    // Website Home Page-----------------------------------------------------------------------------------------
     Route::get('home/brands', [AdminBrandController::class, 'index'])->name('admin.home.brands');
     Route::get('home/brands/list', [AdminBrandController::class, 'list'])->name('admin.home.brand-list');
     Route::post('home/brands', [AdminBrandController::class, 'save'])->name('admin.home.brand-save');
@@ -118,19 +121,36 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('home/case-studies/save', [AdminCaseStudiesController::class, 'save'])->name('admin.home.case-studies.save');
     Route::delete('home/case-studies/{id}/delete', [AdminCaseStudiesController::class, 'delete'])->name('admin.home.case-studies.delete');
     Route::put('home/case-studies/{id}/{status}/status', [AdminCaseStudiesController::class, 'status'])->name('admin.home.case-studies.status');
+    //website about page--------------------------------------------------------------------------------------
+    Route::get('about/worklife', [AdminWorklifeController::class, 'index'])->name('admin.about.worklife');
+    Route::get('about/worklife/list', [AdminWorklifeController::class, 'list'])->name('admin.about.worklife.list');
+    Route::post('about/worklife', [AdminWorklifeController::class, 'save'])->name('admin.about.worklife.save');
+    Route::delete('about/worklife/{id}/delete', [AdminWorklifeController::class, 'delete'])->name('admin.about.worklife.delete');
+    Route::put('about/worklife/{id}/{status}/status', [AdminWorklifeController::class, 'status'])->name('admin.about.worklife.status');
 
+    Route::get('about/leadership', [AdminLeadershipController::class, 'index'])->name('admin.about.leadership');
+    Route::get('about/leadership/list', [AdminLeadershipController::class, 'list'])->name('admin.about.leadership.list');
+    Route::post('about/leadership', [AdminLeadershipController::class, 'save'])->name('admin.about.leadership.save');
+    Route::delete('about/leadership/{id}/delete', [AdminLeadershipController::class, 'delete'])->name('admin.about.leadership.delete');
+    Route::put('about/leadership/{id}/{status}/status', [AdminLeadershipController::class, 'status'])->name('admin.about.leadership.status');
+
+    Route::get('about/presence', [AdminPresenceController::class, 'index'])->name('admin.about.presence');
+    Route::get('about/presence/list', [AdminPresenceController::class, 'list'])->name('admin.about.presence.list');
+    Route::post('about/presence', [AdminPresenceController::class, 'save'])->name('admin.about.presence.save');
+    Route::delete('about/presence/{id}/delete', [AdminPresenceController::class, 'delete'])->name('admin.about.presence.delete');
+    Route::put('about/presence/{id}/{status}/status', [AdminPresenceController::class, 'status'])->name('admin.about.presence.status');
 });
 
 
 
-// Route::fallback(function () {
-//     return redirect()->route('404');
-// });
+Route::fallback(function () {
+    return redirect()->route('404');
+});
 
-// Route::get('/404', function () {
-//     return view('errors.404'); // Or use a specific controller to handle this
-// })->name('404');
+Route::get('/404', function () {
+    return view('errors.404'); // Or use a specific controller to handle this
+})->name('404');
 
-// Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'cmsPages']);
+Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'cmsPages']);
 
 require __DIR__ . '/auth.php';

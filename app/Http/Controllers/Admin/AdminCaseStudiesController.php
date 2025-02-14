@@ -68,16 +68,16 @@ class AdminCaseStudiesController extends Controller
             $icon = $request->file('icon');
             $icon_name = $icon->getClientOriginalName();
             $filename = $user->id . $str . 'icon'  . $icon_name;
-            $icon->move(public_path('/uploads/expertise'), $filename);
-            $data['icon'] = 'uploads/expertise/' . $filename;
+            $icon->move(public_path('/uploads/case_studies'), $filename);
+            $data['icon'] = 'uploads/case_studies/' . $filename;
         }
         if ($request->file('image')) {
             $str2 = now()->timestamp;
             $image = $request->file('image');
             $image_name = $icon->getClientOriginalName();
             $filename2 = $user->id . $str2 . $image_name;
-            $image->move(public_path('/uploads/expertise'), $filename2);
-            $data['image'] = 'uploads/expertise/' . $filename2;
+            $image->move(public_path('/uploads/case_studies'), $filename2);
+            $data['image'] = 'uploads/case_studies/' . $filename2;
         }
         if ($request->id) {
             $table = DB::table('success_storypage_casestudy')->where('id', decrypt($request->id))->update($data);

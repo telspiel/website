@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 @section('title')
-    | Supercharging Business
+    | Case Studies
 @endsection
 @section('css')
     <style>

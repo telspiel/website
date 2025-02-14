@@ -65,6 +65,9 @@
                        <li><a href="{{ route('admin.about.presence') }}"><i
                                    class="material-icons-outlined">arrow_right</i>Presence-Company</a>
                        </li>
+                       <li><a href="{{ route('admin.about.testimonials') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Testimonials-Career</a>
+                       </li>
                    </ul>
                </li>
            </ul>

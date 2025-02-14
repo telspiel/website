@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PresenceRequest extends FormRequest
+class TestimonialRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,15 @@ class PresenceRequest extends FormRequest
     {
         $request = [];
         if (!request('id')) {
-            $request['icon'] = 'required|file|mimes:jpg,jpeg,png,gif|max:2048';
+            $request['image'] = 'required|file|mimes:jpg,jpeg,png,gif|max:2048';
         }
         return [
-            'iframe' => ['required', 'string'],
-            'country' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'email' => ['required', 'string','email'],
-            'phone_no' => ['required', 'string'],
+            'name' => ['required', 'string'],
+            'designation' => ['required', 'string'],
+            'short_desc' => ['required', 'string'],
+            'video' => ['nullable', 'string'],
+            'image_alt' => ['nullable', 'string'],
+            'image_title' => ['nullable', 'string'],
             'status' => ['required', 'string'],
         ] + $request;
     }

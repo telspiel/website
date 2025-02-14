@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 @section('title')
-|Dashboard
+| Dashboard
 @endsection
 @section('content')
   <!--start main wrapper-->
@@ -18,7 +18,7 @@
 							</ol>
 						</nav>
 					</div>
-					
+
 				</div>
 				<!--end breadcrumb-->
 

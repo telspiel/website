@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminLeadershipController;
 use App\Http\Controllers\Admin\AdminPresenceController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSuperhargingBusinessController;
+use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminWorklifeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -96,6 +97,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // Profile
     Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
     Route::post('/profile/password/update', [AdminProfileController::class, 'updateChange'])->name('admin.profile.password');
+    Route::get('enquiry/profile/user/{id}', [AdminProfileController::class, 'enquiryProfile'])->name('admin.enquiry.profile');
 
     // Website Home Page-----------------------------------------------------------------------------------------
     Route::get('home/brands', [AdminBrandController::class, 'index'])->name('admin.home.brands');
@@ -139,6 +141,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('about/presence', [AdminPresenceController::class, 'save'])->name('admin.about.presence.save');
     Route::delete('about/presence/{id}/delete', [AdminPresenceController::class, 'delete'])->name('admin.about.presence.delete');
     Route::put('about/presence/{id}/{status}/status', [AdminPresenceController::class, 'status'])->name('admin.about.presence.status');
+
+    Route::get('about/testimonials', [AdminTestimonialController::class, 'index'])->name('admin.about.testimonials');
+    Route::get('about/testimonials/list', [AdminTestimonialController::class, 'list'])->name('admin.about.testimonials.list');
+    Route::post('about/testimonial', [AdminTestimonialController::class, 'save'])->name('admin.about.testimonial.save');
+    Route::delete('about/testimonial/{id}/delete', [AdminTestimonialController::class, 'delete'])->name('admin.about.testimonial.delete');
+    Route::put('about/testimonial/{id}/{status}/status', [AdminTestimonialController::class, 'status'])->name('admin.about.testimonial.status');
 });
 
 

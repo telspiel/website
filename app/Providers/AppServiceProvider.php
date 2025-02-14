@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\CareerContact;
 use Illuminate\Support\ServiceProvider;
 use DB;
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+       $noti= CareerContact::orderBy('id','desc')->get();
+        view()->share('notifications', $noti);
     }
 }

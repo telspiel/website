@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Library\ApiResponse;
+use App\Models\CareerContact;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,5 +36,10 @@ class AdminProfileController extends Controller
             'remember_token' => Str::random(60),
         ]);
         return redirect()->route('admin.dashboard')->with('success', 'Password changed successfully');
+    }
+
+    function enquiryProfile($id)  {
+        $data=CareerContact::where('id',decrypt($id))->with(['title','location'])->first();
+        return view('admin.contact-equiry-profile',compact('data'));
     }
 }

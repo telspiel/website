@@ -26,7 +26,7 @@ class AboutUsController extends Controller
         if(!$about_companypage_contents){
             return redirect('404');
         }
-               
+
         return view('pages.about.about-company', compact('about_companypage_contents','about_companypage_worklife','about_company_testimonials','about_company_locations','about_companypage_headings'));
     }
 
@@ -40,10 +40,10 @@ class AboutUsController extends Controller
         if(!$about_resourcespage_headings){
             return redirect('404');
         }
-               
+
         return view('pages.about.about-resources', compact('about_resourcespage_headings','about_resourcespage_media','about_resourcespage_blogs','about_resourcespage_webinars'));
     }
-    
+
     public function career(Request $request)
     {
 
@@ -79,7 +79,7 @@ class AboutUsController extends Controller
         if($locationFilter !=''){
             return view('pages.about.about-career', compact('about_carrierpage_headings','about_carrierpage_jobs','about_carrier_jobsDetails','about_carrierpage_locations','about_carrierpage_testimonials'))->with('section', 'aboutFilterSection');
         }
-               
+
         return view('pages.about.about-career', compact('about_carrierpage_headings','about_carrierpage_jobs','about_carrier_jobsDetails','about_carrierpage_locations','about_carrierpage_testimonials'));
     }
 
@@ -128,7 +128,7 @@ class AboutUsController extends Controller
 
                 $message->subject('Telspiel: Career Page Enquiry');
                 $message->to($toemail,'Telspiel');
-                
+
             });
 
             // Redirect or return response
@@ -137,6 +137,6 @@ class AboutUsController extends Controller
         return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
-    
-    
+
+
 }

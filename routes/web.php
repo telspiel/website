@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminArrayExpertiseController;
+use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminCaseStudiesController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminLeadershipController;
+use App\Http\Controllers\Admin\AdminMediaController;
 use App\Http\Controllers\Admin\AdminPresenceController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSuperhargingBusinessController;
@@ -147,6 +149,18 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('about/testimonial', [AdminTestimonialController::class, 'save'])->name('admin.about.testimonial.save');
     Route::delete('about/testimonial/{id}/delete', [AdminTestimonialController::class, 'delete'])->name('admin.about.testimonial.delete');
     Route::put('about/testimonial/{id}/{status}/status', [AdminTestimonialController::class, 'status'])->name('admin.about.testimonial.status');
+
+    Route::get('about/media', [AdminMediaController::class, 'index'])->name('admin.about.media');
+    Route::get('about/media/list', [AdminMediaController::class, 'list'])->name('admin.about.media.list');
+    Route::post('about/media', [AdminMediaController::class, 'save'])->name('admin.about.media.save');
+    Route::delete('about/media/{id}/delete', [AdminMediaController::class, 'delete'])->name('admin.about.media.delete');
+    Route::put('about/media/{id}/{status}/status', [AdminMediaController::class, 'status'])->name('admin.about.media.status');
+
+    Route::get('about/blogs', [AdminBlogController::class, 'index'])->name('admin.about.blogs');
+    Route::get('about/blogs/list', [AdminBlogController::class, 'list'])->name('admin.about.blogs.list');
+    Route::post('about/blog', [AdminBlogController::class, 'save'])->name('admin.about.blog.save');
+    Route::delete('about/blog/{id}/delete', [AdminBlogController::class, 'delete'])->name('admin.about.blog.delete');
+    Route::put('about/blog/{id}/{status}/status', [AdminBlogController::class, 'status'])->name('admin.about.blog.status');
 });
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\CareerContact;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Mail;
 class AboutUsController extends Controller
 {
@@ -89,7 +90,7 @@ class AboutUsController extends Controller
             $job_id = 0;
             $location_id = 0;
             if($request->job_id !=''){
-                $getIds = DB::table('about_carrier_jobs')
+                $getIds = FacadesDB::table('about_carrier_jobs')
                             ->where('id',$request->job_id)
                             ->first();
                 if($getIds){

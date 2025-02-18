@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminPresenceController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSuperhargingBusinessController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
+use App\Http\Controllers\Admin\AdminWebinarController;
 use App\Http\Controllers\Admin\AdminWorklifeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -161,6 +162,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('about/blog', [AdminBlogController::class, 'save'])->name('admin.about.blog.save');
     Route::delete('about/blog/{id}/delete', [AdminBlogController::class, 'delete'])->name('admin.about.blog.delete');
     Route::put('about/blog/{id}/{status}/status', [AdminBlogController::class, 'status'])->name('admin.about.blog.status');
+
+    Route::get('about/webinars', [AdminWebinarController::class, 'index'])->name('admin.about.webinars');
+    Route::get('about/webinars/list', [AdminWebinarController::class, 'list'])->name('admin.about.webinars.list');
+    Route::post('about/webinar', [AdminWebinarController::class, 'save'])->name('admin.about.webinar.save');
+    Route::delete('about/webinar/{id}/delete', [AdminWebinarController::class, 'delete'])->name('admin.about.webinar.delete');
+    Route::put('about/webinar/{id}/{status}/status', [AdminWebinarController::class, 'status'])->name('admin.about.webinar.status');
 });
 
 

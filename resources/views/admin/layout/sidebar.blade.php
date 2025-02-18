@@ -74,6 +74,9 @@
                        <li><a href="{{ route('admin.about.blogs') }}"><i
                                    class="material-icons-outlined">arrow_right</i>Blogs-Resources</a>
                        </li>
+                       <li><a href="{{ route('admin.about.webinars') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Webinars-Resources</a>
+                       </li>
                    </ul>
                </li>
            </ul>

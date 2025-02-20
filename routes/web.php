@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminCaseStudiesController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
+use App\Http\Controllers\Admin\AdminImpactNumbersController;
 use App\Http\Controllers\Admin\AdminLeadershipController;
 use App\Http\Controllers\Admin\AdminMediaController;
 use App\Http\Controllers\Admin\AdminPresenceController;
@@ -168,6 +169,20 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('about/webinar', [AdminWebinarController::class, 'save'])->name('admin.about.webinar.save');
     Route::delete('about/webinar/{id}/delete', [AdminWebinarController::class, 'delete'])->name('admin.about.webinar.delete');
     Route::put('about/webinar/{id}/{status}/status', [AdminWebinarController::class, 'status'])->name('admin.about.webinar.status');
+
+    // website Solution page ----------------------------------------------------------------------------------------
+    Route::get('solutions/impact-numbers', [AdminImpactNumbersController::class, 'index'])->name('admin.solutions.impact-numbers');
+    Route::post('solutions/impact-numbers/save', [AdminImpactNumbersController::class, 'impactSave'])->name('admin.solutions.impact-numbers.save');
+    Route::post('solutions/compliance/save', [AdminImpactNumbersController::class, 'complianceSave'])->name('admin.solutions.compliance.save');
+    Route::put('solutions/compliance/{id}/{status}/status', [AdminImpactNumbersController::class, 'status'])->name('admin.solutions.compliance.status');
+    Route::delete('solutions/compliance/{id}/delete', [AdminImpactNumbersController::class, 'complianceDelete'])->name('admin.solutions.compliance.delete');
+
+    Route::post('solutions/usp/save', [AdminImpactNumbersController::class, 'uspSave'])->name('admin.solutions.usp.save');
+    Route::put('solutions/usp/{id}/{status}/status', [AdminImpactNumbersController::class, 'uspStatus'])->name('admin.solutions.usp.status');
+    Route::delete('solutions/usp/{id}/delete', [AdminImpactNumbersController::class, 'uspDelete'])->name('admin.solutions.usp.delete');
+
+    Route::get('solutions/category', [AdminImpactNumbersController::class, 'category'])->name('admin.solutions.category');
+
 });
 
 

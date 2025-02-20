@@ -41,14 +41,6 @@
                        </li>
                    </ul>
                </li>
-               {{-- <li class="@if (Route::is('admin.clients')) mm-active @endif">
-            <a href="{{ route('admin.clients') }}">
-              <div class="parent-icon"><i class="material-icons-outlined">group</i>
-              </div>
-              <div class="menu-title">Clients</div>
-            </a>
-
-          </li> --}}
                <li class="@if (Route::is('admin.about.*')) mm-active @endif">
                    <a href="javascript:;" class="has-arrow">
                        <div class="parent-icon"><i class="material-icons-outlined">info</i>
@@ -77,6 +69,23 @@
                        <li><a href="{{ route('admin.about.webinars') }}"><i
                                    class="material-icons-outlined">arrow_right</i>Webinars-Resources</a>
                        </li>
+                   </ul>
+               </li>
+               <li class="@if (Route::is('admin.solutions.*')) mm-active @endif">
+                   <a href="javascript:;" class="has-arrow">
+                       <div class="parent-icon"><i class="material-icons-outlined">emoji_objects</i>
+                       </div>
+                       <div class="menu-title">Solutions</div>
+                   </a>
+                   <ul>
+                       <li><a href="{{ route('admin.solutions.impact-numbers') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Our impact in numbers</a>
+                       </li>
+                       <li><a href="{{ route('admin.solutions.category') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Category</a>
+                       </li>
+
+
                    </ul>
                </li>
            </ul>

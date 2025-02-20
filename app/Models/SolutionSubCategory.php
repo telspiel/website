@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SolutionSubCategory extends Model
 {
@@ -17,4 +18,9 @@ class SolutionSubCategory extends Model
         'image',
         'link_name'
     ];
+
+    public function category_data(): BelongsTo
+    {
+        return $this->belongsTo(SolutionMainCategory::class, 'cat_id', 'id');
+    }
 }

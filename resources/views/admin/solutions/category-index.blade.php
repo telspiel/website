@@ -1,14 +1,30 @@
 @extends('admin.layout.main')
 @section('title')
-    | Worklife
+    | Category
 @endsection
+@section('css')
+    <style>
+        .no-border {
+            border: none;
+        }
+
+        .textarea-dimension {
+            height: 150px;
+            width: 350px !important;
+        }
+
+        .save-btn {
+            border: none;
+            background-color: white;
+        }
+    </style>
 @section('content')
     <!--start main wrapper-->
     <main class="main-wrapper">
         <div class="main-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Worklife</div>
+                <div class="breadcrumb-title pe-3">Category</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
@@ -36,16 +52,75 @@
                         <table id="example" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>Main Category Name</th>
                                     <th>Title</th>
-                                    <th>Short Description</th>
+                                    <th>Detail</th>
+                                    <th>Slug</th>
+                                    <th>Icon</th>
                                     <th>Image</th>
-                                    <th>CTA Name</th>
-                                    <th>CTA Link</th>
+                                    <th>Image Alt</th>
+                                    <th>Image Title</th>
+                                    <th>Link Name</th>
+                                    <th>Banner CTA Name</th>
+                                    <th>Banner CTA Link</th>
+                                    <th>Meta Title</th>
+                                    <th>Meta Desc</th>
+                                    <th>Meta Keyword</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @foreach ($subCategory as $subcat)
+                                    <tr id="tridusp{{ $subcat->id }}">
+                                        <td>{{ $subcat->category_data->name }}</td>
+                                        <td>{{ $subcat->title }}</td>
+                                        <td>
+                                            <textarea class="no-border form-control textarea-dimension" name="shortdesc" readonly>
+                                             {!! nl2br(e($subcat->detail)) !!}</textarea>
+                                        </td>
+                                        <td>{{ $subcat->slug }}</td>
+                                        <td>
+                                            <a href="{{ asset($subcat->icon) }}" target="_blank"><img
+                                                    src="{{ asset($subcat->icon) }}" height="100px" width="100xp"></a>
+                                        <td>
+                                            <a href="{{ asset($subcat->image) }}" target="_blank"><img
+                                                    src="{{ asset($subcat->image) }}" height="100px" width="100xp"></a>
+                                        </td>
+                                        <td>{{ $subcat->image_alt }}</td>
+                                        <td>{{ $subcat->image_title }}</td>
+                                        <td>{{ $subcat->link_name }}</td>
+                                        <td>{{ $subcat->banner_cta_name }}</td>
+                                        <td>{{ $subcat->banner_cta_link }}</td>
+                                        <td>{{ $subcat->meta_title }}</td>
+                                        <td>{{ $subcat->meta_desc }}</td>
+                                        <td>{{ $subcat->keyword }}</td>
 
+                                        <td><select id="status{{ $subcat->id }}" style="width: fit-content !important;"
+                                                class="form-select"
+                                                onchange="caseStatus('{{ encrypt($subcat->id) }}',this.value)" required>
+                                                <option value="Enable" @if ($subcat->status == 'Enable') selected @endif>
+                                                    Enable
+                                                </option>
+                                                <option value="Disable" @if ($subcat->status == 'Disable') selected @endif>
+                                                    Disable
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div style="width:max-content">
+                                                <a href="#!" onclick="edit({{ json_encode($subcat) }})">
+                                                    <i class="material-icons-outlined">edit</i>
+                                                </a>
+                                                <a href="#!"
+                                                    onclick="delete_cat('{{ encrypt($subcat->id) }}',{{ $subcat->id }})">
+                                                    <i class="material-icons-outlined">delete</i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -108,7 +183,8 @@
                                         <hr>
                                         <div class="card">
                                             <div class="card-body">
-                                                <label for="image" class="form-label">Image should be (800*500) and less
+                                                <label for="image" class="form-label">Image should be (800*500) and
+                                                    less
                                                     than 5MB</label>
                                                 <div id="img_section">
                                                     <input id="image" type="file" name="image" class="dropify"
@@ -144,64 +220,65 @@
         window.table = "";
         $(document).ready(function() {
             $('.dropify').dropify();
-            table = $('#example').DataTable({
-                processing: true,
-                serverSide: true,
-                ordering: false,
-                searching: true,
-                ajax: {
-                    url: '{{ route('admin.about.worklife.list') }}',
-                },
-                columns: [{
-                        data: 'title',
-                        name: 'title'
-                    },
-                    {
-                        data: 'short_desc',
-                        name: 'short_desc'
-                    },
-                    {
-                        name: 'image'
-                    },
-                    {
-                        data: 'cta_name',
-                        name: 'cta_name'
-                    }, {
-                        data: 'cta_link',
-                        name: 'cta_link'
-                    },
-                    {
+            table = $('#example').DataTable();
+            // table = $('#example').DataTable({
+            //     processing: true,
+            //     serverSide: true,
+            //     ordering: false,
+            //     searching: true,
+            //     ajax: {
+            //         url: '{{ route('admin.about.worklife.list') }}',
+            //     },
+            //     columns: [{
+            //             data: 'title',
+            //             name: 'title'
+            //         },
+            //         {
+            //             data: 'short_desc',
+            //             name: 'short_desc'
+            //         },
+            //         {
+            //             name: 'image'
+            //         },
+            //         {
+            //             data: 'cta_name',
+            //             name: 'cta_name'
+            //         }, {
+            //             data: 'cta_link',
+            //             name: 'cta_link'
+            //         },
+            //         {
 
-                        name: 'status',
-                    },
-                    {
-                        name: 'action'
-                    },
+            //             name: 'status',
+            //         },
+            //         {
+            //             name: 'action'
+            //         },
 
-                ],
-                columnDefs: [{
-                    "targets": 2,
-                    "render": function(data, type, full) {
-                        return `<a href="{{ asset('${full.image}') }}" target="_blank"> <img src="{{ asset('${full.image}') }}" width="100" height="100"/></a>`;
-                    }
-                }, {
-                    "targets": 5,
-                    "render": function(data, type, full) {
-                        return `<select id="status" class="form-select" name="status" style="width: fit-content !important;" onchange="brandStatus('${full.encrypt_id}',this.value)" required>
-                                        <option value="Enable" ${(full.status=='Enable')? "selected" :''}>Enable</option>
-                                        <option value="Disable" ${(full.status=='Disable')? "selected" :''}>Disable</option>
-                                    </select>`;
-                    }
-                }, {
-                    "targets": 6,
-                    "render": function(data, type, full) {
-                        return `<div style="width: max-content !important;"><a href="#!" onclick="deleteLogo('${full.encrypt_id}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-primary"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>
-                                                &nbsp;&nbsp;
-                                                <a href="#!" onclick="edit('${full.encrypt_id}','${full.image}','${full.title}','${full.short_desc}','${full.cta_name}','${full.cta_link}','${full.status}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-primary"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
-                                            </div>`;
-                    }
-                }]
-            });
+            //     ],
+            //     columnDefs: [{
+            //         "targets": 2,
+            //         "render": function(data, type, full) {
+            //             return `<a href="{{ asset('${full.image}') }}" target="_blank"> <img src="{{ asset('${full.image}') }}" width="100" height="100"/></a>`;
+            //         }
+            //     }, {
+            //         "targets": 5,
+            //         "render": function(data, type, full) {
+            //             return `<select id="status" class="form-select" name="status" style="width: fit-content !important;" onchange="brandStatus('${full.encrypt_id}',this.value)" required>
+        //                             <option value="Enable" ${(full.status=='Enable')? "selected" :''}>Enable</option>
+        //                             <option value="Disable" ${(full.status=='Disable')? "selected" :''}>Disable</option>
+        //                         </select>`;
+            //         }
+            //     }, {
+            //         "targets": 6,
+            //         "render": function(data, type, full) {
+            //             return `<div style="width: max-content !important;"><a href="#!" onclick="deleteLogo('${full.encrypt_id}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-primary"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>
+        //                                     &nbsp;&nbsp;
+        //                                     <a href="#!" onclick="edit('${full.encrypt_id}','${full.image}','${full.title}','${full.short_desc}','${full.cta_name}','${full.cta_link}','${full.status}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-primary"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
+        //                                 </div>`;
+            //         }
+            //     }]
+            // });
         });
 
         function deleteLogo(id) {
@@ -275,8 +352,8 @@
             });
         }
 
-        function edit(id,image,title,short_desc,cta_name,cta_link,status) {
-          
+        function edit(id, image, title, short_desc, cta_name, cta_link, status) {
+
 
             $('#img_section').empty();
             var url = "/" + image;

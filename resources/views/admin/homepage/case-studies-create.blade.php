@@ -195,7 +195,7 @@
                                 <div class="col-md-12">
                                     <div class="d-md-flex d-grid align-items-center gap-3">
                                         <button type="submit" class="btn px-4"
-                                            style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}">
+                                            style="background-image: linear-gradient(315deg, #373435 0%, #ffcc29 74%) !important;}">
                                             @if ($data)
                                                 Update
                                             @else

@@ -18,6 +18,7 @@
             background-color: white;
         }
     </style>
+@endsection
 @section('content')
     <!--start main wrapper-->
     <main class="main-wrapper">
@@ -72,7 +73,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($subCategory as $subcat)
-                                    <tr id="tridusp{{ $subcat->id }}">
+                                    <tr id="tr_category{{ $subcat->id }}">
                                         <td>{{ $subcat->category_data->name }}</td>
                                         <td>{{ $subcat->title }}</td>
                                         <td>
@@ -98,7 +99,7 @@
 
                                         <td><select id="status{{ $subcat->id }}" style="width: fit-content !important;"
                                                 class="form-select"
-                                                onchange="caseStatus('{{ encrypt($subcat->id) }}',this.value)" required>
+                                                onchange="status('{{ encrypt($subcat->id) }}',this.value)" required>
                                                 <option value="Enable" @if ($subcat->status == 'Enable') selected @endif>
                                                     Enable
                                                 </option>
@@ -113,7 +114,7 @@
                                                     <i class="material-icons-outlined">edit</i>
                                                 </a>
                                                 <a href="#!"
-                                                    onclick="delete_cat('{{ encrypt($subcat->id) }}',{{ $subcat->id }})">
+                                                    onclick="delete_category('{{ encrypt($subcat->id) }}',{{ $subcat->id }})">
                                                     <i class="material-icons-outlined">delete</i>
                                                 </a>
                                             </div>
@@ -133,17 +134,27 @@
                     <div class="modal-content">
                         <div class="modal-header border-bottom-0 py-2"
                             style="background-image: linear-gradient(310deg, #edefef 0%, #ffce00 100%) !important;">
-                            <h5 class="modal-title">Add Worklife</h5>
+                            <h5 class="modal-title">Add Category</h5>
                             <a href="javascript:;" class="primaery-menu-close close_btn" data-bs-dismiss="modal">
                                 <i class="material-icons-outlined">close</i>
                             </a>
                         </div>
                         <div class="modal-body">
                             <div class="form-body">
-                                <form class="row g-3 form_class" action="{{ route('admin.about.worklife.save') }}"
+                                <form class="row g-3 form_class" action="{{ route('admin.solutions.category.save') }}"
                                     method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" value="" name="id" id="id">
+                                    <div class="col-md-12">
+                                        <label for="status_model" class="form-label">Main Category<span style="color:red">
+                                                *</span></label>
+                                        <select id="cat_id" class="form-select" name="cat_id" required>
+                                            <option value="">Choose...</option>
+                                            @foreach ($mainCategory as $main_cat)
+                                                <option value="{{ $main_cat->id }}">{{ $main_cat->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="col-md-12">
                                         <label for="title" class="form-label">Title<span style="color:red">
                                                 *</span></label>
@@ -151,22 +162,37 @@
                                             placeholder="Title" required>
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="short_desc" class="form-label">Short Description<span style="color:red">
+                                        <label for="slug" class="form-label">Slug<span style="color:red">
                                                 *</span></label>
-                                        <textarea type="text" class="form-control" id="short_desc" name="short_desc" placeholder="Short Description"
-                                            required></textarea>
+                                        <input type="text" class="form-control" id="slug" name="slug"
+                                            placeholder="Slug" required>
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="cta_name" class="form-label">CTA Name<span style="color:red">
+                                        <label for="detail" class="form-label">Detail<span style="color:red">
                                                 *</span></label>
-                                        <input type="text" class="form-control" id="cta_name" name="cta_name"
-                                            placeholder="CTA Name" required>
+                                        <textarea type="text" class="form-control" id="detail" name="detail" placeholder="Detail" required></textarea>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="link_name" class="form-label">Link Name<span style="color:red">
+                                                *</span></label>
+                                        <input type="text" class="form-control" id="link_name" name="link_name"
+                                            placeholder="Link Name" required>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="banner_cta_name" class="form-label">Banner CTA Name<span
+                                                style="color:red">
+                                                *</span></label>
+                                        <input type="text" class="form-control" id="banner_cta_name"
+                                            name="banner_cta_name" placeholder="Banner CTA Name" required>
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="cta_link" class="form-label">CTA Link<span style="color:red">
+                                        <label for="banner_cta_link" class="form-label">Banner CTA Link<span
+                                                style="color:red">
                                                 *</span></label>
-                                        <input type="text" class="form-control" id="cta_link" name="cta_link"
-                                            placeholder="CTA Link" required>
+                                        <input type="text" class="form-control" id="banner_cta_link"
+                                            name="banner_cta_link" placeholder="Banner CTA Link" required>
                                     </div>
 
                                     <div class="col-md-12">
@@ -178,24 +204,53 @@
                                             <option value="Disable">Disable</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-12 mx-auto">
-                                        <h6 class="mb-0 text-uppercase">Image<span style="color:red"> *</span></h6>
-                                        <hr>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <label for="image" class="form-label">Image should be (800*500) and
-                                                    less
-                                                    than 5MB</label>
-                                                <div id="img_section">
-                                                    <input id="image" type="file" name="image" class="dropify"
-                                                        accept=".jpg, .png, image/jpeg, image/png" data-max-width="850"
-                                                        data-max-height="500" data-max-file-size="5M" required
-                                                        data-default-file="">
+                                    <div id="img_section">
+                                        <div class="col-md-12 mx-auto">
+                                            <h6 class="mb-0 text-uppercase">Icon<span style="color:red"> *</span></h6>
+                                            <hr>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label for="image" class="form-label">Image should be (800*500) and
+                                                        less
+                                                        than 5MB</label>
+                                                    <div id="img_section">
+                                                        <input id="icon" type="file" name="icon"
+                                                            class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+                                                            data-max-width="850" data-max-height="500"
+                                                            data-max-file-size="5M" required data-default-file="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12 mx-auto">
+                                            <h6 class="mb-0 text-uppercase">Image<span style="color:red"> *</span></h6>
+                                            <hr>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label for="image" class="form-label">Image should be (800*500) and
+                                                        less
+                                                        than 5MB</label>
+                                                    <div id="img_section">
+                                                        <input id="image" type="file" name="image"
+                                                            class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+                                                            data-max-width="850" data-max-height="500"
+                                                            data-max-file-size="5M" required data-default-file="">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="col-md-12">
+                                        <label for="image_alt" class="form-label">Image ALT</label>
+                                        <input type="text" class="form-control" id="image_alt" name="image_alt"
+                                            placeholder="Image ALT" >
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="image_title" class="form-label">Image Title</label>
+                                        <input type="text" class="form-control" id="image_title" name="image_title"
+                                            placeholder="Image Title" >
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="d-md-flex d-grid align-items-center gap-3">
                                             <button type="submit" class="btn px-4"
@@ -281,7 +336,7 @@
             // });
         });
 
-        function deleteLogo(id) {
+        function delete_category(id, trid) {
 
             Swal.fire({
                 title: "Are you sure?",
@@ -294,7 +349,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `/admin/about/worklife/${id}/delete`,
+                        url: `/admin/solutions/category/${id}/delete`,
                         type: "delete",
                         data: {
                             "_token": "{{ csrf_token() }}"
@@ -307,7 +362,7 @@
                                     icon: "success"
 
                                 });
-                                table.ajax.reload();
+                                $('#tr_category' + trid).remove();
                             } else {
                                 Swal.fire({
                                     title: response.message,
@@ -323,9 +378,9 @@
 
         }
 
-        function brandStatus(id, status) {
+        function status(id, status) {
             $.ajax({
-                url: `/admin/about/worklife/${id}/${status}/status`,
+                url: `/admin/solutions/category/${id}/${status}/status`,
                 type: "put",
                 data: {
                     "_token": "{{ csrf_token() }}"
@@ -339,7 +394,7 @@
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        table.ajax.reload();
+
                     } else {
                         Swal.fire({
                             title: response.message,
@@ -352,32 +407,98 @@
             });
         }
 
-        function edit(id, image, title, short_desc, cta_name, cta_link, status) {
+        function edit(subcat) {
 
 
             $('#img_section').empty();
-            var url = "/" + image;
-            var img_file = `<input id="image" type="file" name="image" class="dropify"
-                            accept=".jpg, .png, image/jpeg, image/png" data-max-width="850"
-                            data-max-height="500" data-max-file-size="5M"
-                            data-default-file="${url}">`;
+            var icon_url = "/" + subcat.icon;
+            var image_url = "/" + subcat.image;
+            var img_file = ` <div class="col-md-12 mx-auto">
+                                <h6 class="mb-0 text-uppercase">Icon<span style="color:red"> *</span></h6>
+                                <hr>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <label for="image" class="form-label">Image should be (800*500) and
+                                            less
+                                            than 5MB</label>
+                                        <div id="img_section">
+                                            <input id="icon" type="file" name="icon" class="dropify"
+                                            accept=".jpg, .png, image/jpeg, image/png" data-max-width="850"
+                                            data-max-height="500" data-max-file-size="5M"
+                                            data-default-file="${icon_url}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-md-12 mx-auto">
+                                            <h6 class="mb-0 text-uppercase">Image<span style="color:red"> *</span></h6>
+                                            <hr>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label for="image" class="form-label">Image should be (800*500) and
+                                                        less
+                                                        than 5MB</label>
+                                                    <div id="img_section">
+                                                        <input id="image" type="file" name="image"
+                                                            class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+                                                            data-max-width="850" data-max-height="500"
+                                                            data-max-file-size="5M" data-default-file="${image_url}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
 
             $('#img_section').append(img_file);
-            $('#title').val(title);
-            $('#short_desc').val(short_desc);
-            $('#cta_name').val(cta_name);
-            $('#cta_link').val(cta_link);
-            $('#status_model').val(status);
-            $('#id').val(id);
+            $('#cat_id').val(subcat.cat_id);
+            $('#title').val(subcat.title);
+            $('#slug').val(subcat.slug);
+            $('#detail').val(subcat.detail);
+            $('#link_name').val(subcat.link_name);
+            $('#banner_cta_name').val(subcat.banner_cta_name);
+            $('#banner_cta_link').val(subcat.banner_cta_link);
+            $('#status_model').val(subcat.status);
+            $('#image_alt').val(subcat.image_alt);
+            $('#image_title').val(subcat.image_title);
+            $('#id').val(subcat.id);
             $('.dropify').dropify();
             $('#FormModal').modal('show');
         }
         $('.close_btn').on('click', function() {
             $('.form_class')[0].reset();
             $('#img_section').empty();
-            var img_file = `<input id="image" type="file" name="image" class="dropify"
-                            accept=".jpg, .png, image/jpeg, image/png" data-max-width="850"
-                            data-max-height="500" data-max-file-size="5M" required>`;
+            var img_file = ` <div class="col-md-12 mx-auto">
+                                <h6 class="mb-0 text-uppercase">Icon<span style="color:red"> *</span></h6>
+                                <hr>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <label for="image" class="form-label">Image should be (800*500) and
+                                            less
+                                            than 5MB</label>
+
+                                            <input id="icon" type="file" name="icon" class="dropify"
+                                            accept=".jpg, .png, image/jpeg, image/png" data-max-width="850"
+                                            data-max-height="500" data-max-file-size="5M"
+                                            data-default-file="" required>
+
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-md-12 mx-auto">
+                                            <h6 class="mb-0 text-uppercase">Image<span style="color:red"> *</span></h6>
+                                            <hr>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label for="image" class="form-label">Image should be (800*500) and
+                                                        less
+                                                        than 5MB</label>
+                                                        <input id="image" type="file" name="image"
+                                                            class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+                                                            data-max-width="850" data-max-height="500"
+                                                            data-max-file-size="5M" required data-default-file="">
+
+                                                </div>
+                                            </div>
+                                        </div>`;
             $('#img_section').append(img_file);
             $('#id').val('');
             $('#image').dropify();

@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Library\ApiResponse;
-use App\Models\SolutionMainCategory;
-use App\Models\SolutionSubCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -188,11 +186,5 @@ class AdminImpactNumbersController extends Controller
         } catch (\Exception $th) {
             return ApiResponse::exception($th);
         }
-    }
-    public function category(): View
-    {
-        $mainCategory = SolutionMainCategory::get();
-        $subCategory = SolutionSubCategory::latest('id')->with('category_data')->get();
-        return view('admin.solutions.category-index', compact('mainCategory', 'subCategory'));
     }
 }

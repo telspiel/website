@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminArrayExpertiseController;
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminCaseStudiesController;
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminImpactNumbersController;
@@ -181,7 +182,10 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::put('solutions/usp/{id}/{status}/status', [AdminImpactNumbersController::class, 'uspStatus'])->name('admin.solutions.usp.status');
     Route::delete('solutions/usp/{id}/delete', [AdminImpactNumbersController::class, 'uspDelete'])->name('admin.solutions.usp.delete');
 
-    Route::get('solutions/category', [AdminImpactNumbersController::class, 'category'])->name('admin.solutions.category');
+    Route::get('solutions/category', [AdminCategoryController::class, 'category'])->name('admin.solutions.category');
+    Route::post('solutions/category/save', [AdminCategoryController::class, 'save'])->name('admin.solutions.category.save');
+    Route::put('solutions/category/{id}/{status}/status', [AdminCategoryController::class, 'status'])->name('admin.solutions.category.status');
+    Route::delete('solutions/category/{id}/delete', [AdminCategoryController::class, 'delete'])->name('admin.solutions.category.delete');
 
 });
 

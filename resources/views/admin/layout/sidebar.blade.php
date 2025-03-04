@@ -5,8 +5,8 @@
         <img src="{{ asset('website/assets/images/Tespiel_Logo.png')}}" class="logo-img" alt="">
       </div> --}}
            <div class="logo-name flex-grow-1">
-               <img src="{{ asset('website/assets/images/Tespiel_Logo.png') }}" width="100%" height="100%"
-                   alt="">
+               <a href="{{ route('admin.dashboard') }}"> <img src="{{ asset('website/assets/images/Tespiel_Logo.png') }}"
+                       width="100%" height="100%" alt=""></a>
            </div>
            <div class="sidebar-close">
                <span class="material-icons-outlined">close</span>

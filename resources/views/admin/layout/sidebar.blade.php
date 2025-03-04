@@ -108,6 +108,24 @@
 
                    </ul>
                </li>
+               <li class="@if (Route::is('admin.success-stories.*')) mm-active @endif">
+                   <a href="javascript:;" class="has-arrow">
+                       <div class="parent-icon"><i class="material-icons-outlined">auto_stories</i>
+                       </div>
+                       <div class="menu-title">Success Stories</div>
+                   </a>
+                   <ul>
+                       <li><a href="{{ route('admin.success-stories.case-study') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Case Study</a>
+                       </li>
+                       <li><a href="{{ route('admin.success-stories.compliance') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Compliance</a>
+                       </li>
+
+
+
+                   </ul>
+               </li>
            </ul>
            <!--end navigation-->
        </div>

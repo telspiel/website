@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AdminBenefitController;
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminCaseStudiesController;
+use App\Http\Controllers\Admin\AdminCaseStudyController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
+use App\Http\Controllers\Admin\AdminComplianceController;
 use App\Http\Controllers\Admin\AdminImpactNumbersController;
 use App\Http\Controllers\Admin\AdminIntegrationsController;
 use App\Http\Controllers\Admin\AdminLeadershipController;
@@ -204,6 +206,14 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('integrations/usp/save', [AdminBenefitController::class, 'uspsave'])->name('admin.integrations.usp.save');
     Route::put('integrations/usp/{id}/{status}/status', [AdminBenefitController::class, 'uspstatus'])->name('admin.integrations.usp.status');
     Route::delete('integrations/usp/{id}/delete', [AdminBenefitController::class, 'uspdelete'])->name('admin.integrations.usp.delete');
+
+    // success stories ----------------------------------------------------------------------------------------
+    Route::get('success-stories/case-study', [AdminCaseStudiesController::class, 'index'])->name('admin.success-stories.case-study');
+
+    Route::get('success-stories/compliance', [AdminComplianceController::class, 'index'])->name('admin.success-stories.compliance');
+    Route::post('success-stories/compliance/save', [AdminComplianceController::class, 'save'])->name('admin.success-stories.compliance.save');
+    Route::put('success-stories/compliance/{id}/{status}/status', [AdminComplianceController::class, 'status'])->name('admin.success-stories.compliance.status');
+    Route::delete('success-stories/compliance/{id}/delete', [AdminComplianceController::class, 'delete'])->name('admin.success-stories.compliance.delete');
 });
 
 

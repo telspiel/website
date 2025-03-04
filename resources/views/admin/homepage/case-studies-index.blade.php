@@ -23,52 +23,52 @@
     <!--start main wrapper-->
     <main class="main-wrapper">
         <div class="main-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Case Studies | Title</div>
 
+            @if (Route::is('admin.home.case-studies'))
+                <!--breadcrumb-->
+                <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                    <div class="breadcrumb-title pe-3">Case Studies | Title</div>
 
-
-            </div>
-            <!--end breadcrumb-->
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <form method="post" action="{{ route('admin.home.case-studies-title.save') }}">
-                            @csrf
-                            <input type="hidden" id="title_id" name="case_study_title_id"
-                                value="{{ encrypt($caseTitle->id) }}">
-                            <table id="example2" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Heading</th>
-                                        <th>Action</th>
-                                    </tr>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="text" class="no-border form-control" readonly name="title"
-                                                value="{{ $caseTitle->title }}"></td>
-                                        <td>
-                                            <textarea class="no-border form-control" name="heading" readonly>
+                </div>
+                <!--end breadcrumb-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form method="post" action="{{ route('admin.home.case-studies-title.save') }}">
+                                @csrf
+                                <input type="hidden" id="title_id" name="case_study_title_id"
+                                    value="{{ encrypt($caseTitle->id) }}">
+                                <table id="example2" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Heading</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" class="no-border form-control" readonly name="title"
+                                                    value="{{ $caseTitle->title }}"></td>
+                                            <td>
+                                                <textarea class="no-border form-control" name="heading" readonly>
                                          {!! nl2br(e($caseTitle->heading)) !!} </textarea>
-                                        </td>
-                                        <td>
-                                            <div id="table-action">
-                                                <a href="#!" onclick="editRow()">
-                                                    <i class="material-icons-outlined">edit</i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                </thead>
-                            </table>
-                        </form>
+                                            </td>
+                                            <td>
+                                                <div id="table-action">
+                                                    <a href="#!" onclick="editRow()">
+                                                        <i class="material-icons-outlined">edit</i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </thead>
+                                </table>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            @endif
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                 <div class="breadcrumb-title pe-3">Case Studies</div>
                 <div class="ps-3">
@@ -244,7 +244,7 @@
                     "render": function(data, type, full) {
                         return `<img src="{{ asset('${full.icon}') }}" />`;
                     }
-                },{
+                }, {
                     "targets": 4,
                     "render": function(data, type, full) {
                         return `<textarea class="form-control" style="width:fit-content;height:150px" readonly>${full.shot_desc}</textarea>`;

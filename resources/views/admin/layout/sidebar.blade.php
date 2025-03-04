@@ -88,6 +88,26 @@
 
                    </ul>
                </li>
+               <li class="@if (Route::is('admin.integrations.*')) mm-active @endif">
+                   <a href="javascript:;" class="has-arrow">
+                       <div class="parent-icon"><i class="material-icons-outlined">integration_instructions</i>
+                       </div>
+                       <div class="menu-title">Integrations</div>
+                   </a>
+                   <ul>
+                       <li><a href="{{ route('admin.integrations.api-integrations') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>API & Integrations</a>
+                       </li>
+                       <li><a href="{{ route('admin.integrations.benefits') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>Benefits</a>
+                       </li>
+                       <li><a href="{{ route('admin.integrations.usp') }}"><i
+                                   class="material-icons-outlined">arrow_right</i>USP</a>
+                       </li>
+
+
+                   </ul>
+               </li>
            </ul>
            <!--end navigation-->
        </div>

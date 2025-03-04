@@ -64,7 +64,7 @@ class AdminCategoryController extends Controller
         if ($table) {
             return redirect()->route('admin.solutions.category')->with('success', $msg);
         } else {
-            return back()->with('error', 'Category is saved successfully');
+            return back()->with('error', 'Category is not saved.');
         }
     }
     public function status($id, $status): JsonResponse

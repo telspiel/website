@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminArrayExpertiseController;
+use App\Http\Controllers\Admin\AdminBenefitController;
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminCaseStudiesController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminImpactNumbersController;
+use App\Http\Controllers\Admin\AdminIntegrationsController;
 use App\Http\Controllers\Admin\AdminLeadershipController;
 use App\Http\Controllers\Admin\AdminMediaController;
 use App\Http\Controllers\Admin\AdminPresenceController;
@@ -187,6 +189,21 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::put('solutions/category/{id}/{status}/status', [AdminCategoryController::class, 'status'])->name('admin.solutions.category.status');
     Route::delete('solutions/category/{id}/delete', [AdminCategoryController::class, 'delete'])->name('admin.solutions.category.delete');
 
+    // integrations page ----------------------------------------------------------------------------------------
+    Route::get('integrations/api-integrations', [AdminIntegrationsController::class, 'index'])->name('admin.integrations.api-integrations');
+    Route::post('integrations/api-integrations/save', [AdminIntegrationsController::class, 'save'])->name('admin.integrations.api-integrations.save');
+    Route::put('integrations/api-integrations/{id}/{status}/status', [AdminIntegrationsController::class, 'status'])->name('admin.integrations.api-integrations.status');
+    Route::delete('integrations/api-integrations/{id}/delete', [AdminIntegrationsController::class, 'delete'])->name('admin.integrations.api-integrations.delete');
+
+    Route::get('integrations/benefits', [AdminBenefitController::class, 'index'])->name('admin.integrations.benefits');
+    Route::post('integrations/benefits/save', [AdminBenefitController::class, 'save'])->name('admin.integrations.benefits.save');
+    Route::put('integrations/benefits/{id}/{status}/status', [AdminBenefitController::class, 'status'])->name('admin.integrations.benefits.status');
+    Route::delete('integrations/benefits/{id}/delete', [AdminBenefitController::class, 'delete'])->name('admin.integrations.benefits.delete');
+
+    Route::get('integrations/usp', [AdminBenefitController::class, 'uspindex'])->name('admin.integrations.usp');
+    Route::post('integrations/usp/save', [AdminBenefitController::class, 'uspsave'])->name('admin.integrations.usp.save');
+    Route::put('integrations/usp/{id}/{status}/status', [AdminBenefitController::class, 'uspstatus'])->name('admin.integrations.usp.status');
+    Route::delete('integrations/usp/{id}/delete', [AdminBenefitController::class, 'uspdelete'])->name('admin.integrations.usp.delete');
 });
 
 

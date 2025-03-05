@@ -89,7 +89,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-floating">
                                                 <textarea class="form-control @error('message') is-invalid @enderror" name="message" placeholder="Leave a comment here" id="message" style="height: 100px" required>{{ old('message') }}</textarea>
-                                                <label for="message">Message / Querry</label>
+                                                <label for="message">Message / Query</label>
                                                 
                                             </div>
                                             <!-- @error('message')

@@ -124,8 +124,8 @@
                                             <ul class="list-with-icon">
                                                 <li>
                                                     @if($benfit->card1_icon !='')
-						    <img src="{{url($benfit->card1_icon)}}" @if(isset($benfit->card1_icon_alt)) alt="{{url($benfit->card1_icon_alt)}}" @endif @if(isset($benfit->card1_icon_title)) title="{{url($benfit->card1_icon_title)}}" @endif>
-						    @endif
+                                                    <img src="{{url($benfit->card1_icon)}}" alt="{{$benfit->card1_title}}" title="{{$benfit->card1_title}}">
+                                                    @endif
                                                     <div class="">
                                                         <h6>{{$benfit->card1_title}}</h6>
                                                         <p>{{$benfit->card1_details}}</p>
@@ -134,7 +134,7 @@
                                                 @if($benfit->card2_title !='')
                                                 <li>
                                                     @if($benfit->card2_icon !='')
-                                                    <img src="{{url($benfit->card2_icon)}}" alt="{{$benfit->card2_icon_alt}}" title="{{$benfit->card2_icon_title}}">
+                                                    <img src="{{url($benfit->card2_icon)}}" alt="{{$benfit->card2_title}}" title="{{$benfit->card2_title}}">
                                                     @endif
                                                     <div class="">
                                                         <h6>{{$benfit->card2_title}}</h6>
@@ -145,7 +145,7 @@
                                                 @if($benfit->card3_title !='')
                                                 <li>
                                                     @if($benfit->card3_icon !='')
-                                                    <img src="{{url($benfit->card3_icon)}}" alt="{{$benfit->card3_icon_alt}}" title="{{$benfit->card3_icon_title}}">
+                                                    <img src="{{url($benfit->card3_icon)}}" alt="{{$benfit->card3_title}}" title="{{$benfit->card3_title}}">
                                                     @endif
                                                     <div class="">
                                                         <h6>{{$benfit->card3_title}}</h6>

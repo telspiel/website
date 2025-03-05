@@ -25,6 +25,4 @@ class CareerContact extends Model
     {
         return $this->belongsTo(AboutCarrierpageLocations::class, 'location_id', 'id');
     }
-
-
 }

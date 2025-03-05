@@ -8,7 +8,7 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
-
+    
     @if(optional(\App\Models\HomePageAboutUs::where('status','Enable')->first())->id)
     <section class="section-spacing">
         <div class="container">
@@ -33,8 +33,8 @@
                                 <div class="d-flex align-items-start gap-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                                 <div class="icon_about">
                                 <img src="{{url(optional(\App\Models\HomePageAboutUs::where('status','Enable')->first())->feature1_icon)}}" alt="" />
-
-                                </div>
+                                   
+                                </div>  
                                 <div class="">
                                         <h3 class="fs-6">{{optional(\App\Models\HomePageAboutUs::where('status','Enable')->first())->feature1}}</h3>
                                         <p class="fs-14 text-secondary-60">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="d-flex align-items-start gap-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                                <div class="icon_about">
+                                <div class="icon_about"> 
                                 <img src="{{url(optional(\App\Models\HomePageAboutUs::where('status','Enable')->first())->feature4_icon)}}" alt="" />
 </div>
                                 <div class="">
@@ -97,13 +97,13 @@
             Brands that trust telSpiel
         </h2>
         <!-- <div class="brands-slider speed-test" data-speed="60">
-
+           
                 @foreach($Clients as $clint)
                 <div class="brands-logo">
                     <img src="{{url($clint->logo)}}" alt="{{$clint->client_name}}" title="{{$clint->title}}" />
                 </div>
                 @endforeach
-
+            
         </div> -->
         <div class="swiper brandsLogo-slider">
         <div class="swiper-wrapper">
@@ -148,7 +148,7 @@
                                     <li class="incard-{{$i++}}">
                                         <img src="{{url($solution->icon)}}" alt="{{$solution->image_alt}}" title="{{$solution->image_title}}" />
                                         <div class="">
-                                            <a href="https://telspiel.vdpl.tech/solutions"><h5>{{$solution->title}}</h5>
+                                            <a href="/solutions"><h5>{{$solution->title}}</h5>
                                             <p>
                                                 {{$solution->detail}}
                                             </p></a>
@@ -190,7 +190,7 @@
                 </div>
             </div>
             </div>
-
+           
         </div>
     </section>
     @endif
@@ -358,7 +358,7 @@
         </div>
     </section>
     @endif
-
+    
     @endsection
 
 
@@ -405,10 +405,10 @@
     });
 		  var verswiper = new Swiper('.verslider', {
     slidesPerView: 1,
-    direction: 'vertical',
-
+    direction: 'vertical',     
+    
     loop:true,
-
+    
     autoplay: {
       delay: 2000,
       reverseDirection: true,

@@ -113,5 +113,5 @@ $(document).ready(function () {
     });
 });
 </script>
-
+<script>!function(e,t,a){var c=e.head||e.getElementsByTagName("head")[0],n=e.createElement("script");n.async=!0,n.defer=!0, n.type="text/javascript",n.src=t+"/static/js/chat_widget.js?config="+JSON.stringify(a),c.appendChild(n)}(document,"https://app.wab.ai",{bot_key:"f264817202964f6e",welcome_msg:true,branding_key:"live-wab-ai",server:"https://app.wab.ai",e:"p" });</script>
   @yield('script_content')

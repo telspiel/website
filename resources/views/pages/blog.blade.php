@@ -19,22 +19,26 @@
   </div>
 </div>
 
-<section class="section-spacing" data-aos="fade-up">
+<section class="section-spacing" id="my-section" data-aos="fade-up">
   <div class="container">
-    <div class="row align-items-center g-4">
+	  <div class="reduce-90px-width">
+     <div class="row align-items-center g-4">
      @if(!$about_resourcespage_blogs->isEmpty())   
      @foreach($about_resourcespage_blogs as $blog)
       <div class="col-lg-4">
-        <div class="card case-card blog-card">
+         <div class="card case-card">
           <div class="card-body"> <a href="{{url('blog/'.$blog->cta_link)}}"><img src="{{url($blog->image)}}" class="w-100" alt="{{$blog->image_alt}}" /></a>
-            <a href="{{url('blog/'.$blog->cta_link)}}" class="grey-heading"><h6 class="fs-5 fw-bold">{{$blog->title}}</a></h6>
+            <a href="{{url('blog/'.$blog->cta_link)}}" class="grey-heading"><h6 class="fs-5 fw-bold">{{$blog->title}}</h6></a>
+			  
+		
+			  
             <p> {{$blog->content}} </p>
             <a href="{{url('blog/'.$blog->cta_link)}}" class="d-flex align-items-center gap-2 pt-2 grey-1 fw-semibold">Learn More <img src="{{asset('assets/images/icons/grey-arrow.svg')}}" class="mb-0" alt=""></a> </div>
         </div>
       </div>
      @endforeach
      @endif
-    </div>
+		  </div></div>
   </div>
 </section>
 

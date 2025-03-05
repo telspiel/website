@@ -68,6 +68,18 @@ Route::get('/solutions/{slug}/{subCatId}', [App\Http\Controllers\HomeController:
 
 
 
+Route::fallback(function () {
+    return redirect()->route('404');
+});
+
+Route::get('/404', function () {
+    return view('errors.404'); // Or use a specific controller to handle this
+})->name('404');
+
+Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'cmsPages']);
+
+
+
 
 Route::middleware('guest')->prefix('admin')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -217,15 +229,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 });
 
 
-
-Route::fallback(function () {
-    return redirect()->route('404');
-});
-
-Route::get('/404', function () {
-    return view('errors.404'); // Or use a specific controller to handle this
-})->name('404');
-
-Route::get('/{slug}', [App\Http\Controllers\HomeController::class, 'cmsPages']);
 
 require __DIR__ . '/auth.php';

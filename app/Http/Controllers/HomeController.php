@@ -185,7 +185,7 @@ class HomeController extends Controller
             $name = $request->name;
             $email = $request->email;
             $phone = $request->ph_no;
-            $toemail = 'marketing@telspiel.com';
+            $toemail = 'telspielcommunications@gmail.com';
             // dd($job_id);
             \Mail::send('emails.bottom_contact_enquiry', compact('name','email','phone'), function ($message) use ($toemail) {
 
@@ -386,7 +386,7 @@ class HomeController extends Controller
             $phone = $request->phone;
             $company = $request->company_name;
             $message_data = $request->message;
-            $toemail = 'marketing@telspiel.com';
+            $toemail = 'telspielcommunications@gmail.com';
             // dd($job_id);
             \Mail::send('emails.career_enquiry', compact('name','email','phone','company','message_data','job_id','location_id'), function ($message) use ($toemail) {
 

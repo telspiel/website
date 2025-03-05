@@ -15,14 +15,7 @@
        <div class="sidebar-nav mm-active">
            <!--navigation-->
            <ul class="metismenu" id="sidenav" class="has-arrow mm-collapse">
-               {{-- <li class="@if (Route::is('admin.dashboard')) mm-active @endif">
-            <a href="/admin/dashboard" >
-              <div class="parent-icon"><i class="material-icons-outlined">home</i>
-              </div>
-              <div class="menu-title">Dashboard</div>
-            </a>
-
-          </li> --}}
+       
                <li class="@if (Route::is('admin.home.*')) mm-active @endif">
                    <a href="javascript:;" class="has-arrow">
                        <div class="parent-icon"><i class="material-icons-outlined">home</i>

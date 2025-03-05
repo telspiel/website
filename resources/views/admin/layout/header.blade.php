@@ -6,43 +6,9 @@
          </div>
          <div class="search-bar flex-grow-1">
              <div class="position-relative">
-                 <input class="form-control rounded-5 px-5 search-control d-lg-block d-none" type="text"
-                     placeholder="Search">
-                 <span
-                     class="material-icons-outlined position-absolute d-lg-block d-none ms-3 translate-middle-y start-0 top-50">search</span>
-                 <span
-                     class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 search-close">close</span>
                  <div class="search-popup p-3">
                      <div class="card rounded-4 overflow-hidden">
-                         <div class="card-header d-lg-none">
-                             <div class="position-relative">
-                                 <input class="form-control rounded-5 px-5 mobile-search-control" type="text"
-                                     placeholder="Search">
-                                 <span
-                                     class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50">search</span>
-                                 <span
-                                     class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 mobile-search-close">close</span>
-                             </div>
-                         </div>
                          <div class="card-body search-content">
-                             <p class="search-title">Recent Searches</p>
-                             <div class="d-flex align-items-start flex-wrap gap-2 kewords-wrapper">
-                                 <a href="javascript:;" class="kewords"><span>Angular Template</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                                 <a href="javascript:;" class="kewords"><span>Dashboard</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                                 <a href="javascript:;" class="kewords"><span>Admin Template</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                                 <a href="javascript:;" class="kewords"><span>Bootstrap 5 Admin</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                                 <a href="javascript:;" class="kewords"><span>Html eCommerce</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                                 <a href="javascript:;" class="kewords"><span>Sass</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                                 <a href="javascript:;" class="kewords"><span>laravel 9</span><i
-                                         class="material-icons-outlined fs-6">search</i></a>
-                             </div>
-
                          </div>
                      </div>
                  </div>
@@ -50,146 +16,6 @@
          </div>
          </div>
          <ul class="navbar-nav gap-1 nav-right-links align-items-center">
-
-             {{-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside"
-            data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">apps</i></a>
-          <div class="dropdown-menu dropdown-menu-end dropdown-apps shadow-lg p-3">
-            <div class="border rounded-4 overflow-hidden">
-              <div class="row row-cols-3 g-0 border-bottom">
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="{{ asset('website/assets/images/apps/01.png')}}" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Gmail</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="{{ asset('website/assets/images/apps/02.png')}}" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Skype</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/03.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Slack</p>
-                    </div>
-                  </div>
-                </div>
-              </div><!--end row-->
-
-              <div class="row row-cols-3 g-0 border-bottom">
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/04.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">YouTube</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/05.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Google</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/06.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Instagram</p>
-                    </div>
-                  </div>
-                </div>
-              </div><!--end row-->
-
-              <div class="row row-cols-3 g-0 border-bottom">
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/07.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Spotify</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/08.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Yahoo</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/09.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Facebook</p>
-                    </div>
-                  </div>
-                </div>
-              </div><!--end row-->
-
-              <div class="row row-cols-3 g-0">
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/10.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Figma</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col border-end">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/11.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Paypal</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
-                    <div class="app-icon">
-                      <img src="assets/images/apps/12.png" width="36" alt="">
-                    </div>
-                    <div class="app-name">
-                      <p class="mb-0">Photo</p>
-                    </div>
-                  </div>
-                </div>
-              </div><!--end row-->
-            </div>
-          </div>
-        </li> --}}
              <li class="nav-item dropdown">
                  <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
                      data-bs-auto-close="outside" data-bs-toggle="dropdown" href="javascript:;"><i
@@ -234,7 +60,8 @@
                      <div class="notify-list" style="height: 300px; overflow-y: scroll;">
                          @foreach ($notifications as $notification)
                              <div>
-                                 <a class="dropdown-item border-bottom py-2" href="{{ route('admin.enquiry.profile',[encrypt($notification->id)]) }}">
+                                 <a class="dropdown-item border-bottom py-2"
+                                     href="{{ route('admin.enquiry.profile', [encrypt($notification->id)]) }}">
                                      <div class="d-flex align-items-center gap-3">
                                          <div class="">
                                              <img src="{{ asset('website/assets/images/avatars/01.png') }}"
@@ -244,7 +71,8 @@
                                              <h5 class="notify-title">{{ $notification->name }}</h5>
                                              <p class="mb-0 notify-desc">{{ $notification->message }}
                                              </p>
-                                             <p class="mb-0 notify-time">{{ $notification->created_at->format('d-m-Y H:i')}}</p>
+                                             <p class="mb-0 notify-time">
+                                                 {{ $notification->created_at->format('d-m-Y H:i') }}</p>
                                          </div>
                                          <div class="notify-close position-absolute end-0 me-3">
                                              <i class="material-icons-outlined fs-6">close</i>
@@ -280,8 +108,8 @@
 
              <li class="nav-item dropdown">
                  <a href="javascrpt:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                     <img src="{{ asset('assets/images/icon.png') }}" class="rounded-circle p-1 border"
-                         width="45" height="45" alt="">
+                     <img src="{{ asset('assets/images/icon.png') }}" class="rounded-circle p-1 border" width="45"
+                         height="45" alt="">
                  </a>
                  <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
                      <a class="dropdown-item  gap-2 py-2" href="javascript:;">

@@ -14,7 +14,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Analysis</li>
+								<li class="breadcrumb-item active" aria-current="page">User</li>
 							</ol>
 						</nav>
 					</div>
@@ -29,10 +29,11 @@
                 <div class="row">
                   <div class="col-12 col-sm-7">
                     <div class="d-flex align-items-center gap-3 mb-5">
-                      <img src="{{ asset('website/assets/images/avatars/01.png')}}" class="rounded-circle bg-grd-info p-1"  width="60" height="60" alt="user">
+                        {{-- <img src="http://127.0.0.1:8000/assets/images/icon.png" class="rounded-circle p-1 border" width="45" height="45" alt=""> --}}
+                      <img src="{{ asset('assets/images/icon.png')}}" class="rounded-circle bg-grd-info p-1"  width="60" height="60" alt="user">
                       <div class="">
                         <p class="mb-0 fw-semibold">Welcome back</p>
-                        <h4 class="fw-semibold mb-0 fs-4 mb-0">Jhon Anderson!</h4>
+                        <h4 class="fw-semibold mb-0 fs-4 mb-0">{{ Auth::user()->name }}</h4>
                       </div>
                     </div>
                     <div class="d-flex align-items-center gap-5">

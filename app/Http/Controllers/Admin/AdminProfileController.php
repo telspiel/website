@@ -27,7 +27,7 @@ class AdminProfileController extends Controller
         ]);
         $user = Auth::user();
 
-        $checked = Hash::check($request->password, $user->password);
+        $checked = Hash::check($request->old_password, $user->password);
         if (!$checked) {
             return redirect()->back()->with('error', 'Old Password is wrong');
         }

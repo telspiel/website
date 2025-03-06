@@ -15,7 +15,7 @@
        <div class="sidebar-nav mm-active">
            <!--navigation-->
            <ul class="metismenu" id="sidenav" class="has-arrow mm-collapse">
-       
+
                <li class="@if (Route::is('admin.home.*')) mm-active @endif">
                    <a href="javascript:;" class="has-arrow">
                        <div class="parent-icon"><i class="material-icons-outlined">home</i>
@@ -24,13 +24,13 @@
                    </a>
                    <ul>
                        <li><a href="{{ route('admin.home.brands') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Brands</a>
+                                   class="material-icons-outlined">flare</i>Brands</a>
                        </li>
                        <li><a href="{{ route('admin.home.array-expertise') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Array Of Our Expertise</a>
+                                   class="material-icons-outlined">flare</i>Array Of Our Expertise</a>
                        </li>
                        <li><a href="{{ route('admin.home.case-studies') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Case Studies</a>
+                                   class="material-icons-outlined">flare</i>Case Studies</a>
                        </li>
                    </ul>
                </li>
@@ -42,25 +42,25 @@
                    </a>
                    <ul>
                        <li><a href="{{ route('admin.about.worklife') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Worklife-Company</a>
+                                   class="material-icons-outlined">flare</i>Worklife-Company</a>
                        </li>
                        <li><a href="{{ route('admin.about.leadership') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Leadership-Company</a>
+                                   class="material-icons-outlined">flare</i>Leadership-Company</a>
                        </li>
                        <li><a href="{{ route('admin.about.presence') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Presence-Company</a>
+                                   class="material-icons-outlined">flare</i>Presence-Company</a>
                        </li>
                        <li><a href="{{ route('admin.about.testimonials') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Testimonials-Career</a>
+                                   class="material-icons-outlined">flare</i>Testimonials-Career</a>
                        </li>
                        <li><a href="{{ route('admin.about.media') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Media-Resources</a>
+                                   class="material-icons-outlined">flare</i>Media-Resources</a>
                        </li>
                        <li><a href="{{ route('admin.about.blogs') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Blogs-Resources</a>
+                                   class="material-icons-outlined">flare</i>Blogs-Resources</a>
                        </li>
                        <li><a href="{{ route('admin.about.webinars') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Webinars-Resources</a>
+                                   class="material-icons-outlined">flare</i>Webinars-Resources</a>
                        </li>
                    </ul>
                </li>
@@ -72,10 +72,10 @@
                    </a>
                    <ul>
                        <li><a href="{{ route('admin.solutions.impact-numbers') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Our impact in numbers</a>
+                                   class="material-icons-outlined">flare</i>Our impact in numbers</a>
                        </li>
                        <li><a href="{{ route('admin.solutions.category') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Category</a>
+                                   class="material-icons-outlined">flare</i>Category</a>
                        </li>
 
 
@@ -89,13 +89,13 @@
                    </a>
                    <ul>
                        <li><a href="{{ route('admin.integrations.api-integrations') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>API & Integrations</a>
+                                   class="material-icons-6outlined">flare</i>API & Integrations</a>
                        </li>
                        <li><a href="{{ route('admin.integrations.benefits') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Benefits</a>
+                                   class="material-icons-outlined">flare</i>Benefits</a>
                        </li>
                        <li><a href="{{ route('admin.integrations.usp') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>USP</a>
+                                   class="material-icons-outlined">flare</i>USP</a>
                        </li>
 
 
@@ -109,10 +109,10 @@
                    </a>
                    <ul>
                        <li><a href="{{ route('admin.success-stories.case-study') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Case Study</a>
+                                   class="material-icons-outlined">flare</i>Case Studies</a>
                        </li>
                        <li><a href="{{ route('admin.success-stories.compliance') }}"><i
-                                   class="material-icons-outlined">arrow_right</i>Compliance</a>
+                                   class="material-icons-outlined">flare</i>Compliance</a>
                        </li>
 
 

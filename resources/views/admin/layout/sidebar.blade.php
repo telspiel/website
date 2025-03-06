@@ -11,8 +11,9 @@
            <div class="sidebar-close">
                <span class="material-icons-outlined">close</span>
            </div>
-       </div>
-       <div class="sidebar-nav mm-active">
+        </div>
+        <div class="sidebar-nav mm-active">
+           <hr>
            <!--navigation-->
            <ul class="metismenu" id="sidenav" class="has-arrow mm-collapse">
 

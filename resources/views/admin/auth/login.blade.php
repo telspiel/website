@@ -45,7 +45,7 @@
 
                         <div class="card rounded-0 mb-0 border-0 shadow-none bg-transparent bg-none">
                             <div class="card-body">
-                                <img src="{{ asset('assets/images/auth/login1.png') }}"
+                                <img src="{{ asset('website/assets/images/gallery/welcome-back-3.png') }}"
                                     class="img-fluid auth-img-cover-login" width="650" alt="">
                             </div>
                         </div>

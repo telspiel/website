@@ -89,7 +89,7 @@
                    </a>
                    <ul>
                        <li><a href="{{ route('admin.integrations.api-integrations') }}"><i
-                                   class="material-icons-6outlined">flare</i>API & Integrations</a>
+                                   class="material-icons-outlined">flare</i>API & Integrations</a>
                        </li>
                        <li><a href="{{ route('admin.integrations.benefits') }}"><i
                                    class="material-icons-outlined">flare</i>Benefits</a>

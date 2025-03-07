@@ -20,7 +20,7 @@ class AdminMediaController extends Controller
     }
     public function list()
     {
-        $data = DB::table('about_resourcespage_media')->orderBy('id', 'asc')->get();
+        $data = DB::table('about_resourcespage_media')->orderBy('id', 'desc')->get();
         return DataTables::of($data)->addColumn('encrypt_id', function ($data) {
             return encrypt($data->id);
         })->make(true);

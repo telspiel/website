@@ -28,6 +28,7 @@
         <link href="{{ asset('website/sass/dark-theme.css') }}" rel="stylesheet">
         <link href="{{ asset('website/sass/blue-theme.css') }}" rel="stylesheet">
         <link href="{{ asset('website/sass/responsive.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.16.0/dist/sweetalert2.min.css">
 
     </head>
 
@@ -111,7 +112,7 @@
 
         <!--plugins-->
         <script src="{{ asset('website/assets/js/jquery.min.js') }}"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.16.0/dist/sweetalert2.all.min.js"></script>
         <script>
             $(document).ready(function() {
                 $("#show_hide_password a").on('click', function(event) {
@@ -127,6 +128,57 @@
                     }
                 });
             });
+        </script>
+        <script>
+            @if (session()->has('success'))
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "{{ session('success') }}",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            @endif
+            @if (session()->has('warning'))
+                Swal.fire({
+                    title: "{{ session('warning') }}",
+                    icon: "warning",
+                    draggable: true
+                });
+            @endif
+            @if (session()->has('info'))
+                Swal.fire({
+                    title: "{{ session('info') }}",
+                    icon: "info",
+                    draggable: true
+                });
+            @endif
+            @if (session()->has('error'))
+                Swal.fire({
+                    title: "{{ session('error') }}",
+                    icon: "error",
+                    draggable: true
+                });
+            @endif
+            var er = {!! $errors !!};
+
+
+            if (er.length !== 0) {
+                var list = "";
+                $.each(er, function(i, errors) {
+                    $.each(errors, function(i, error) {
+                        list = list + `<li>${error}</li>`;
+
+                    });
+                });
+                Swal.fire({
+                    title: `<ul>${list}</ul>`,
+                    icon: "error",
+                    draggable: true
+                });
+                // console.log(list);
+
+            }
         </script>
 
     </body>

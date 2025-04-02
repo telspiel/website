@@ -26,7 +26,9 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,12 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/login',[AdminController::class, 'login'])->name('login');
 // Route::get('/login',[AdminController::class, 'login'])->name('login');
+
+Route::get('KnowledgeHub/Technical/ApiDocuments', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/API_Domestic SMS_telSpiel.pdf';
+    return response()->file($file);
+});
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -227,6 +235,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::put('success-stories/compliance/{id}/{status}/status', [AdminComplianceController::class, 'status'])->name('admin.success-stories.compliance.status');
     Route::delete('success-stories/compliance/{id}/delete', [AdminComplianceController::class, 'delete'])->name('admin.success-stories.compliance.delete');
 });
+
+
 
 
 

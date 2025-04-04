@@ -7,8 +7,8 @@
 @section("htmlheader_keyword", $integration_page_headings->meta_keyword)
 
 @section('content')
-    
-    
+
+
     <div class="py-5 bg-gradiant-1 borderbottom">
         <div class="container">-
             <div class="row gx-lg-5 align-items-center">
@@ -83,7 +83,7 @@
                                     ->select('integration_sub_categories.*')
                                     ->where('cat_id',$category->id)
                                     ->where('status','Enable')
-                                    ->get(); 
+                                    ->get();
                     @endphp
                     @if(!$integration_sub_categories->isEmpty())
                     <div class="row">
@@ -141,14 +141,14 @@
                                                 $b++;
                                                 @endphp
                                                 @endforeach
-                                               
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-10">
                                     <div class="tab-content" id="myTab2Content">
-                                       
+
                                         @foreach($integration_sub_categories as $subCat)
                                         @php
                                         $integration_services_category = DB::table('integration_services_category')
@@ -230,7 +230,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-lg-10">
                                                     <div class="tab-content">
                                                         @php
@@ -243,7 +243,7 @@
                                                                         ->where('cat_id',$subCat->cat_id)
                                                                         ->where('sub_cat_id',$subCat->id)
                                                                         ->where('status','Enable')
-                                                                        ->get(); 
+                                                                        ->get();
                                                         @endphp
                                                         @if(!$integration_services_category->isEmpty())
                                                         @foreach($integration_services_category as $service)
@@ -254,7 +254,7 @@
                                                                         ->where('sub_cat_id',$service->sub_cat_id)
                                                                         ->where('services_id',$service->id)
                                                                         ->where('status','Enable')
-                                                                        ->first(); 
+                                                                        ->first();
 
                                                         @endphp
                                                         @if(isset($integration_services_content))
@@ -281,7 +281,7 @@
 																	 <button  value="{{$integration_services_content->id}}"
                                                                         class="btn btn-outline-light text-secondary border-light-2 downloadBtnClick"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#">{{$integration_services_content->cta_name}}</button>
+                                                                        data-bs-target="#FormModal">{{$integration_services_content->cta_name}}</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -310,7 +310,7 @@
 
 
                         </div>
-                        
+
                     </div>
                     @endif
                 </div>
@@ -370,7 +370,7 @@
                             <div class="card-body">
                                 <div class="icon_about">
                                 <img src="{{url($usp->icon)}}" alt="{{$usp->image_alt}}" title="{{$usp->image_title}}">
-                               
+
                                 </div>
                                  <h6 class="fs-5 fw-bold hover-color my-3 pb-0">{{$usp->title}}</h6>
                                 <p class="mb-0">{{$usp->short_des}}
@@ -413,6 +413,51 @@
             </div>
         </div>
     </div>
+    {{-- form model --}}
+        <div class="modal fade" id="FormModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0 py-2"
+                        style="background-image: linear-gradient(310deg, #edefef 0%, #ffce00 100%) !important;">
+                        <h5 class="modal-title">Fill Details </h5>
+                        <a href="javascript:;" class="primaery-menu-close close_btn" data-bs-dismiss="modal">
+                            <i class="material-icons-outlined">close</i>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-body">
+                            <form class="row g-3 form_class" action="{{ route('admin.about.worklife.save') }}"
+                                method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-md-12">
+                                    <label for="phone" class="form-label">Phone No<span style="color:red">
+                                            *</span></label>
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                        placeholder="Phone No." required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="email" class="form-label">Email Address<span style="color:red">
+                                            *</span></label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Email Address" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="d-md-flex d-grid align-items-center gap-3">
+                                        <button type="submit" class="btn px-4"
+                                            style="background-image: linear-gradient(310deg, #ffcb00, #ffcb00b8) !important;}">Submit</button>
+                                        <button type="button" class="btn btn-grd-danger px-4 close_btn"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{-- end form model --}}
 @endsection
 
 
@@ -466,7 +511,7 @@
             }else{
                 return alert(data.message);
             }
-            
+
         }
 
        });

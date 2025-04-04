@@ -115,9 +115,31 @@
                        <li><a href="{{ route('admin.success-stories.compliance') }}"><i
                                    class="material-icons-outlined">flare</i>Compliance</a>
                        </li>
-
-
-
+                   </ul>
+               </li>
+                <li class="@if (Route::is('admin.email.*')) mm-active @endif">
+                   <a href="{{ route('admin.email.index') }}" class="has-arrow">
+                       <div class="parent-icon"><i class="material-icons-outlined">email</i>
+                       </div>
+                       <div class="menu-title">Emails</div>
+                   </a>
+                </li>
+               <li class="@if (Route::is('admin.enquiry.*')) mm-active @endif">
+                   <a href="javascript:;" class="has-arrow">
+                       <div class="parent-icon"><i class="material-icons-outlined">saved_search</i>
+                       </div>
+                       <div class="menu-title">Enquiries</div>
+                   </a>
+                   <ul>
+                       <li><a href="{{ route('admin.enquiry.contact-us') }}"><i
+                                   class="material-icons-outlined">flare</i>Contact Us</a>
+                       </li>
+                       <li><a href="{{ route('admin.enquiry.contact-it-revolution') }}"><i
+                                   class="material-icons-outlined">flare</i>Contact Us IT Revolution</a>
+                       </li>
+                       <li><a href="{{ route('admin.enquiry.job-career') }}"><i
+                                   class="material-icons-outlined">flare</i>Job Career</a>
+                       </li>
                    </ul>
                </li>
            </ul>

@@ -16,7 +16,7 @@
         display: block;
     }
 </style>
-    
+
     <div class="py-5 bg-gradiant-1 borderbottom">
         <div class="container">
             <div class="row gx-lg-5 align-items-center">
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
- 
+
     <section class="borderbottom" data-aos="fade-up">
         <div class="container">
             <div class="menu-overlay">
@@ -163,12 +163,12 @@
                 <div class="reduce-90px-width py-lg-4">
                     <div class="row align-items-center g-4">
                         <div class="col-lg-12">
-							
+
                         <div class="badge-only mb-3">
                             <img src="{{url($about_carrierpage_headings->testimonial_icon)}}" alt="" />
                             {{$about_carrierpage_headings->testimonial_title}}
                         </div>
-						
+
                         <h5 class="fs-44 fw-medium text-m-32">{{$about_carrierpage_headings->testimonial_subtitle}}</h5>
 								<div class="star-link mb-3"> <a href="https://www.ambitionbox.com/overview/telspiel-overview" target="_blank"><img src="{{asset('assets/images/icons/star-green-icon.svg')}}" alt=""> 4.4 on <span> Ambition Box </span> | {{optional(\App\Models\SolutionPageHeading::first())->our_imapact_cta_name}}</a> </div>
                     </div>
@@ -210,7 +210,7 @@
 
     <div class="section-spacing " id="contactForm" data-aos="fade-up">
         <div class="container">
-            
+
                 <div class="row gx-lg-5 gy-5">
                     <div class="col-lg-6">
                       <div class="card bg-gradiant-2 rounded-24 h-100 border-0 p-lg-5 p-2">
@@ -231,15 +231,15 @@
                             <a href="tel:{{optional(\App\Models\ContactAddress::first())->phone_no}}" class="d-block text-secondary">{{optional(\App\Models\ContactAddress::first())->phone_no}}</a>
                         </div>
                       </div>
-                   
-                     
+
+
 
                     </div>
 
                     <div class="col-lg-6">
                         <div class="card form-design ms-lg-5">
                             <div class="card-body">
-                                <form method="POST" action="{{ route('contact.store') }}" id="myForm">
+                                <form method="POST" action="{{ route('contact.store') }}" id="myForm" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="job_id" class="jobId" value="">
                                     <div class="row gy-4">
@@ -276,7 +276,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-lg-12">
+                                        {{-- <div class="col-lg-12">
                                             <div class="form-floating">
                                                 <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="cname" name="company_name" placeholder="Company Name" value="{{ old('company_name') }}" required>
                                                 <label for="cname">Company Name</label>
@@ -286,18 +286,18 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <!-- <div class="col-lg-12">
+                                        </div> --}}
+                                        <div class="col-lg-12">
                                             <div class="form-floating">
-                                                <input type="file" class="form-control @error('file_cv') is-invalid @enderror" id="file_cv" name="file_cv" placeholder="Resume/CV" value="{{ old('file_cv') }}" required application/pdf>
-                                                <label for="file_cv">Resume/CV</label>
+                                                <input type="file" class="form-control @error('file_cv') is-invalid @enderror" id="file_cv" name="file_cv" placeholder="Resume/CV"  required />
+                                                <label for="file_cv">Resume/CV(.pdf)</label>
                                                 @error('file_cv')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="col-lg-12">
                                             <div class="form-floating">
                                                 <textarea class="form-control @error('message') is-invalid @enderror" name="message" placeholder="Leave a comment here" id="message" style="height: 100px" required>{{ old('message') }}</textarea>
@@ -319,7 +319,7 @@
                         </div>
                     </div>
                 </div>
-           
+
         </div>
     </div>
 @endsection
@@ -331,7 +331,7 @@
   $('.sectionUl').find('ul').addClass('list-check mt-3');
 
   $('.filterData').on('change', function() {
-        
+
         $('#job-filter-form').submit();
     });
   $(document).on('click','.applyBtn', function(){

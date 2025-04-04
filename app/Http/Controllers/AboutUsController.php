@@ -85,6 +85,7 @@ class AboutUsController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             $job_id = 0;
             $location_id = 0;
@@ -102,9 +103,18 @@ class AboutUsController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
                 'phone' => 'required|string|max:20',
-                'company_name' => 'required|nullable|string|max:255',
                 'message' => 'required|string',
+                'file_cv' => 'required|file|mimes:pdf|max:2048',
             ]);
+
+            if ($request->file('file_cv')) {
+                $image = $request->file('file_cv');
+                $name = $image->getClientOriginalName();
+                $str = now()->timestamp;
+                $image_filename = $str . $name;
+                $image->move(public_path('/cv/users'), $image_filename);
+                $file = 'cv/users/' . $image_filename;
+            }
 
             // Save the data to the database
             CareerContact::create([
@@ -113,8 +123,8 @@ class AboutUsController extends Controller
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'phone' => $validatedData['phone'],
-                'company' => $validatedData['company_name'],
                 'message' => $validatedData['message'],
+                'cv' => $file,
             ]);
 
             $name = $request->name;

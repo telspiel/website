@@ -16,6 +16,7 @@ class CareerContact extends Model
         'phone',
         'company',
         'message',
+        'cv',
     ];
     public function title(): BelongsTo
     {

@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BottomContact extends Model
+class Email extends Model
 {
-    protected $table = 'every_page_bottom_contact_us_enquries';
+    use HasFactory;
     protected $fillable = [
         'name',
         'email',
-        'phone_no',
-        'remarks',
+        'department',
+        'active',
     ];
-
 }

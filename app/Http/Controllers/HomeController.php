@@ -27,12 +27,12 @@ class HomeController extends Controller
         if(!$getBanner){
             return redirect('404');
         }
-               
+
         return view('pages.index', compact('getBanner','Clients','success_storypage_casestudy','solution_sub_categories'));
     }
     public function aboutCmpany()
     {
-              
+
         return view('pages.about-us-company');
     }
     public function solutionPage()
@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         if($solution_main_category->isEmpty()){
             return redirect('404');
-        }        
+        }
 
         $our_impacts_numbers = DB::table('our_impacts_numbers')
                                     ->select('our_impacts_numbers.*')
@@ -70,13 +70,13 @@ class HomeController extends Controller
                                     ->select('solution_sub_categories.*')
                                     ->where('cat_id',$main_cat)
                                     ->where('status','Enable');
-        
+
         $solution_main_category = $solution_sub_categoriesData->get();
         $solution_sub_categories = $solution_sub_categoriesData->where('slug',$subCatId)->first();
 
         if(!isset($solution_sub_categories)){
             return redirect('404');
-        } 
+        }
 
         $solutions_category_cardcontent = DB::table('solutions_category_cardcontent')
                                     ->select('solutions_category_cardcontent.*')
@@ -88,17 +88,17 @@ class HomeController extends Controller
         $solutions_benefits = DB::table('solutions_purpose_benefits')
                                     ->select('solutions_purpose_benefits.*')
                                     ->where('services_id',$solution_sub_categories->id)->where('status','Enable')
-                                    ->get(); 
+                                    ->get();
 
-        
+
 
         if($slug == 'channel-wises'){
             //table: solutions_benefits(channel benefits)
             $solutions_channel_benefits = DB::table('solutions_benefits')
                                     ->select('solutions_benefits.*')
                                     ->where('solution_catid',$solution_sub_categories->id)->where('status','Enable')
-                                    ->get(); 
-            
+                                    ->get();
+
             $success_story_casestudy = DB::table('success_storypage_casestudy')
                                     ->select('success_storypage_casestudy.*')
                                     ->where('product_id',$solution_sub_categories->id)
@@ -108,15 +108,15 @@ class HomeController extends Controller
 
 
             return view('pages.solutions-channel', compact('solution_sub_categories','solutions_category_cardcontent','solutions_channel_benefits','main_cat','success_story_casestudy','solution_main_category','slug'));
-        } 
+        }
         $success_story_casestudy = DB::table('success_storypage_casestudy')
                                     ->select('success_storypage_casestudy.*')
                                     ->whereNotNull('industry_id')
                                     ->where('status','Enable')
-                                    ->get();     
+                                    ->get();
         if($slug == 'industry-wise'){
 
-            
+
             $success_story_casestudy = DB::table('success_storypage_casestudy')
                                     ->select('success_storypage_casestudy.*')
                                     ->where('industry_id',$solution_sub_categories->id)
@@ -130,8 +130,8 @@ class HomeController extends Controller
         $solutions_purpose_benefits = DB::table('solutions_channel_benefits')
                                     ->select('solutions_channel_benefits.*')
                                     ->where('services_id',$solution_sub_categories->id)->where('status','Enable')
-                                    ->get(); 
-        
+                                    ->get();
+
         return view('pages.solutions-services', compact('solution_sub_categories','solutions_category_cardcontent','solutions_purpose_benefits','main_cat','success_story_casestudy','solution_main_category','slug'));
     }
     public function integrations()
@@ -142,15 +142,15 @@ class HomeController extends Controller
         $integration_banner = DB::table('integration_banner')
                                     ->select('integration_banner.*')
                                     ->first();
-        
+
 
         if(!isset($integration_page_headings)){
             return redirect('404');
-        } 
+        }
         $integration_benefits = DB::table('integration_benefits')
                                     ->select('integration_benefits.*')
                                     ->where('status','Enable')
-                                    ->get(); 
+                                    ->get();
         $integration_usp = DB::table('integration_usp')
                                     ->select('integration_usp.*')
                                     ->where('status','Enable')
@@ -159,11 +159,11 @@ class HomeController extends Controller
                                     ->select('integration_categories.*')
                                     ->where('status','Enable')
                                     ->get();
-              
-        
+
+
         return view('pages.integrations', compact('integration_page_headings','integration_usp','integration_benefits','integration_banner','integration_categories'));
     }
-    
+
 
     public function store(Request $request)
     {
@@ -173,6 +173,7 @@ class HomeController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
                 'ph_no' => 'required|string|max:20',
+                'remarks' => 'required|string|max:250',
             ]);
 
             // Save the data to the database
@@ -180,18 +181,20 @@ class HomeController extends Controller
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'phone_no' => $validatedData['ph_no'],
+                'remarks' => $validatedData['remarks'],
             ]);
 
             $name = $request->name;
             $email = $request->email;
             $phone = $request->ph_no;
+            $remarks = $request->remarks;
             $toemail = 'telspielcommunications@gmail.com';
             // dd($job_id);
-            \Mail::send('emails.bottom_contact_enquiry', compact('name','email','phone'), function ($message) use ($toemail) {
+            \Mail::send('emails.bottom_contact_enquiry', compact('name','email','phone', 'remarks'), function ($message) use ($toemail) {
 
-                $message->subject('Telspiel: Contact Us Enquiry');
+                $message->subject('Telspiel:Sales Enquiry');
                 $message->to($toemail,'Telspiel');
-                
+
             });
 
             // Redirect or return response
@@ -210,15 +213,15 @@ class HomeController extends Controller
         $success_storypage_banners = DB::table('success_storypage_banners')
                                     ->select('success_storypage_banners.*')
                                     ->first();
-        
+
 
         if(!isset($success_storypage_headings)){
             return redirect('404');
-        } 
+        }
         $success_storypage_usecaselogo = DB::table('success_storypage_usecaselogo')
                                     ->select('success_storypage_usecaselogo.*')
                                     ->where('status','Enable')
-                                    ->get(); 
+                                    ->get();
         $success_storypage_usp = DB::table('success_storypage_usp')
                                     ->select('success_storypage_usp.*')
                                     ->where('status','Enable')
@@ -227,7 +230,7 @@ class HomeController extends Controller
         $success_storypage_casestudy = DB::table('success_storypage_casestudy')
                                     ->select('success_storypage_casestudy.*')
                                     ->where('status','Enable');
-                                     
+
 
         $industry_filter = $request->input('industry_filter');
         $product_filter = $request->input('product_filter');
@@ -250,8 +253,8 @@ class HomeController extends Controller
                                     ->select('industry_id')
                                     ->where('status', 'Enable')
                                     ->distinct()
-                                    ->get();      
-        
+                                    ->get();
+
         if($industry_filter !=''){
             return view('pages.success-story', compact('success_storypage_headings','success_storypage_usp','success_storypage_usecaselogo','success_storypage_banners','success_storypage_casestudy','success_storypage_prodId','success_storypage_indsId'))->with('section', 'successStorySection');
         }
@@ -265,14 +268,14 @@ class HomeController extends Controller
     {
         $success_storypage_casestudy = DB::table('success_storypage_casestudy')
                                     ->select('success_storypage_casestudy.*')
-                                    ->where('cta_url',$cta_link)  
+                                    ->where('cta_url',$cta_link)
                                     ->where('status','Enable')
                                     ->first();
-        
+
 
         if(!isset($success_storypage_casestudy)){
             return redirect('404');
-        } 
+        }
 
         $success_storypage_casestudyMore = DB::table('success_storypage_casestudy')
                         ->select('success_storypage_casestudy.*')
@@ -294,21 +297,21 @@ class HomeController extends Controller
     public function contactUs()
     {
         $contact_us_page = DB::table('contact_us_page')->first();
-        
+
 
         if(!isset($contact_us_page)){
             return redirect('404');
-        } 
+        }
         return view('pages.contact-us', compact('contact_us_page'));
     }
     public function cmsPages($slug)
     {
         $web_pages = DB::table('web_pages')->where('slug',$slug)->where('status','Enable')->first();
-        
+
 
         if(!isset($web_pages)){
             return redirect('404');
-        } 
+        }
         return view('pages.cms-pages', compact('web_pages'));
     }
     public function downoladPdf(Request $request)
@@ -333,7 +336,7 @@ class HomeController extends Controller
         $name = $request->name;
         $email = $request->email;
         $integration_services_content = DB::table('integration_services_content')->where('id',$request->id)->first();
-        
+
 
         if(!isset($integration_services_content)){
             return response()->json([
@@ -341,7 +344,7 @@ class HomeController extends Controller
                 'error' => 404,
                 'pdf' => ''
             ]);
-        } 
+        }
 
         $dataInsert = [
             'content_id' => $request->id,
@@ -390,9 +393,9 @@ class HomeController extends Controller
             // dd($job_id);
             \Mail::send('emails.career_enquiry', compact('name','email','phone','company','message_data','job_id','location_id'), function ($message) use ($toemail) {
 
-                $message->subject('Telspiel: Career Enquiry');
+                $message->subject('Telspiel: Contact Us ');
                 $message->to($toemail,'Telspiel');
-                
+
             });
 
             // Redirect or return response
@@ -402,6 +405,6 @@ class HomeController extends Controller
         return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
-    
-    
+
+
 }

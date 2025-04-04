@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminComplianceController;
+use App\Http\Controllers\Admin\AdminEmailController;
+use App\Http\Controllers\Admin\AdminEnquiryController;
 use App\Http\Controllers\Admin\AdminImpactNumbersController;
 use App\Http\Controllers\Admin\AdminIntegrationsController;
 use App\Http\Controllers\Admin\AdminLeadershipController;
@@ -46,6 +48,30 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('KnowledgeHub/Technical/ApiDocuments', function () {
     $file = public_path() . '/' . 'Knowledge_hub/API_Domestic SMS_telSpiel.pdf';
+    return response()->file($file);
+});
+Route::get('KnowledgeHub/Sales/Video/CorporateDeck', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/telSpiel_Corporate Deck_Video.mp4';
+    return response()->file($file);
+});
+Route::get('KnowledgeHub/Sales/Video/Infrastructure', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/telSpiel_Infrastructure_Video.mp4';
+    return response()->file($file);
+});
+Route::get('KnowledgeHub/Sales/Video/SolutionSuite', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/telSpiel_Solution Suite_Video.mp4';
+    return response()->file($file);
+});
+Route::get('KnowledgeHub/Sales/Doc/CorporateDeck', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/telSpiel_Corporate Deck.pdf';
+    return response()->file($file);
+});
+Route::get('KnowledgeHub/Sales/Doc/Infrastructure', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/telSpiel_Infrastructure.pdf';
+    return response()->file($file);
+});
+Route::get('KnowledgeHub/Sales/Doc/SolutionSuite', function () {
+    $file = public_path() . '/' . 'Knowledge_hub/telSpiel_Solution Suite.pdf';
     return response()->file($file);
 });
 
@@ -234,6 +260,22 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('success-stories/compliance/save', [AdminComplianceController::class, 'save'])->name('admin.success-stories.compliance.save');
     Route::put('success-stories/compliance/{id}/{status}/status', [AdminComplianceController::class, 'status'])->name('admin.success-stories.compliance.status');
     Route::delete('success-stories/compliance/{id}/delete', [AdminComplianceController::class, 'delete'])->name('admin.success-stories.compliance.delete');
+
+    // enquiry section-------------------------------------------------------------------------------------------
+    Route::get('enquiry/contact-us', [AdminEnquiryController::class, 'contactusIndex'])->name('admin.enquiry.contact-us');
+    Route::get('enquiry/contact-us/list', [AdminEnquiryController::class, 'contactusList'])->name('admin.enquiry.contact-us.list');
+    Route::get('enquiry/contact-it-revolution', [AdminEnquiryController::class, 'itrevolutionIndex'])->name('admin.enquiry.contact-it-revolution');
+    Route::get('enquiry/contact-it-revolution/list', [AdminEnquiryController::class, 'itrevolutionList'])->name('admin.enquiry.contact-it-revolution.list');
+    Route::get('enquiry/job-career', [AdminEnquiryController::class, 'jobCareerIndex'])->name('admin.enquiry.job-career');
+    Route::get('enquiry/job-career/list', [AdminEnquiryController::class, 'jobCareerList'])->name('admin.enquiry.job-career.list');
+
+    // Emails
+    Route::get('email', [AdminEmailController::class, 'index'])->name('admin.email.index');
+    Route::post('email/save', [AdminEmailController::class, 'save'])->name('admin.email.save');
+    Route::put('email/{id}/{status}/status', [AdminComplianceController::class, 'status'])->name('admin.email.status');
+    Route::delete('email/{id}/delete', [AdminComplianceController::class, 'delete'])->name('admin.email.delete');
+    Route::post('email/send', [AdminEmailController::class, 'send'])->name('admin.email.send');
+
 });
 
 

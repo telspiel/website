@@ -8,6 +8,9 @@
         border: 1px solid rgba(139, 157, 167, 0.4);
         height: 54px;
     }
+    .text_area_color{
+        color: #fff; !important;
+    }
 
     .form-control::-webkit-input-placeholder {
         color: #8b9da7
@@ -41,7 +44,7 @@
                 </div>
                 <div class="col-lg-12">
                     <textarea name="remarks" placeholder="Remarks" value="{{ old('remarks') }}"
-                        class="form-control text_area_input @error('remarks') is-invalid @enderror" required></textarea>
+                        class="form-control text_area_input text_area_color @error('remarks') is-invalid @enderror" required></textarea>
                 </div>
 
                 <div class="col-lg-12">

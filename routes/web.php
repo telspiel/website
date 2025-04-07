@@ -272,8 +272,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // Emails
     Route::get('email', [AdminEmailController::class, 'index'])->name('admin.email.index');
     Route::post('email/save', [AdminEmailController::class, 'save'])->name('admin.email.save');
-    Route::put('email/{id}/{status}/status', [AdminComplianceController::class, 'status'])->name('admin.email.status');
-    Route::delete('email/{id}/delete', [AdminComplianceController::class, 'delete'])->name('admin.email.delete');
+    Route::put('email/{id}/{status}/status', [AdminEmailController::class, 'status'])->name('admin.email.status');
+    Route::delete('email/{id}/delete', [AdminEmailController::class, 'delete'])->name('admin.email.delete');
     Route::post('email/send', [AdminEmailController::class, 'send'])->name('admin.email.send');
 
 });

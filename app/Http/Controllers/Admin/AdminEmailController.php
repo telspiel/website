@@ -85,13 +85,16 @@ class AdminEmailController extends Controller
         });
         if ($request->type == 'contact_us') {
             $table = DB::table('contact_page_enquries')->where('id', $request->id)->update(['is_sent' => $request->to_email]);
+            $url= 'admin.enquiry.contact-us';
         } elseif ($request->type == 'contact_it') {
             $table = DB::table('every_page_bottom_contact_us_enquries')->where('id', $request->id)->update(['is_sent' => $request->to_email]);
+            $url = 'admin.enquiry.contact-it-revolution';
         } else {
             $table = DB::table('career_job_enquries')->where('id', $request->id)->update(['is_sent' => $request->to_email]);
+            $url = 'admin.enquiry.job-career';
         }
         if ($table) {
-            return redirect()->route('admin.email.index')->with('success', 'Email is sent');
+            return redirect()->route($url)->with('success', 'Email is sent');
         } else {
             return back()->with('error', 'Email is not sent');
         }

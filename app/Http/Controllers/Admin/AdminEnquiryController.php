@@ -12,7 +12,7 @@ use Yajra\DataTables\Facades\DataTables;
 class AdminEnquiryController extends Controller
 {
     public function contactusIndex() : View {
-        $emails = Email::latest('id')->get();
+        $emails = Email::latest('id')->where('active', 1)->get();
         return view('admin.enquries.contact-us-index',compact('emails'));
     }
     public function contactusList() {
@@ -21,7 +21,7 @@ class AdminEnquiryController extends Controller
 
     }
     public function itrevolutionIndex() : View {
-        $emails = Email::latest('id')->get();
+        $emails = Email::latest('id')->where('active', 1)->get();
         return view('admin.enquries.contact-it-index', compact('emails'));
     }
     public function itrevolutionList() {
@@ -30,7 +30,7 @@ class AdminEnquiryController extends Controller
 
     }
     public function jobCareerIndex() : View {
-        $emails = Email::latest('id')->get();
+        $emails = Email::latest('id')->where('active',1)->get();
         return view('admin.enquries.career-enquiry-index', compact('emails'));
     }
     public function jobCareerList()

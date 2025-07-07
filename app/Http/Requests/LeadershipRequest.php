@@ -33,7 +33,7 @@ class LeadershipRequest extends FormRequest
             'designation' => ['required', 'string'],
             'linkedin_url' => ['required', 'string'],
             // 'position' => ['required', 'string', 'unique:about_company_testimonials,position,' . decrypt(request('id')) . ',id'],
-            'position' => ['required', 'string', 'unique:position'],
+            'position' => ['required', 'string', 'unique:about_company_testimonials,position'],
             'image_alt' => ['nullable', 'string'],
             'image_title' => ['nullable', 'string'],
             'status' => ['required', 'string'],
